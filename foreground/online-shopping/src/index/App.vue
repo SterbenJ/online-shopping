@@ -7,20 +7,18 @@
 </template>
 
 <script>
-import LoginForm from '../login/views/LoginForm.vue';
 export default {
 	data() {
 		return {};
 	},
 	components: {
-		LoginForm
+		
 	},
 	methods: {}
 };
 </script>
 
-<style>
-#app {
-	font-family: Helvetica, sans-serif;
-}
+<style lang="stylus" scoped>
+	#appfont-family
+		Helvetica, sans-serif
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div><el-button class="login-btn" type="primary" @click="httpRequest">登入</el-button></div>
+	<div><el-button type="primary" @click="httpRequest">登入</el-button></div>
 </template>
 
 <script>
@@ -61,6 +61,4 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-	.login-btn
-		width 128px
 </style>

@@ -1,50 +1,43 @@
 <template>
 	<div>
-		<el-card>
+		<div>
 			<el-row :gutter="10" type="flex" justify="space-around">
-				<el-col :span="18">
-					<p class="title">登入</p>
-					<el-row :gutter="10" type="flex" justify="space-around">
-						<el-col :span="24">
-							<el-input 
-							v-model="request.data.account" 
-							placeholder="6-32位"
-							clearable>
-								<template slot="prepend">账号</template>
-							</el-input>
-						</el-col>
+				<el-col :span="20">
+					<el-row>
+						<el-form>
+							<p class="title">登入</p>
+							<el-col :span="24">
+								<el-form-item label="账号"><el-input v-model="request.data.account" placeholder="6-32位" clearable /></el-form-item>
+							</el-col>
+							<el-col :span="24">
+								<el-form-item label="密码"><el-input v-model="request.data.password" placeholder="6-32位" clearable show-password /></el-form-item>
+							</el-col>
+							<el-col :span="12">
+								<el-form-item><login-button :request="request" @LoginSuccess="LoginSuccess()" @LoginFail="LoginFail()" /></el-form-item>
+							</el-col>
+						</el-form>
 					</el-row>
-					<el-row :gutter="10" type="flex" justify="space-around">
-						<el-col :span="24">
-							<el-input 
-							v-model="request.data.password" 
-							placeholder="6-32位"
-							clearable
-							show-password>
-								<template slot="prepend">密码</template>
-							</el-input>
+					<el-row>
+						<el-col :span="12" type="flex" justify="space-around">
+							<regsiter-link-text id="register-link-text" />
 						</el-col>
-					</el-row>
-					<el-row :gutter="10" type="flex" justify="space-around">
-						<el-col :span="12">
-							<login-button :request="request" @LoginSuccess="LoginSuccess()" @LoginFail="LoginFail()" />
-						</el-col>
-						<el-col :span="12">
-							<register-button />
+						<el-col :span="12" type="flex" justify="space-around">
+							<forget-password-link-text id="forget-password-link-text" />
 						</el-col>
 					</el-row>
 				</el-col>
 			</el-row>
-		</el-card>
+		</div>
 	</div>
 </template>
 
 <script>
 import LoginButton from '../components/Button/LoginButton.vue';
-import RegisterButton from '../components/Button/RegisterButton.vue';
+import RegsiterLinkText from '../components/LinkText/RegsiterLinkText.vue';
+import ForgetPasswordLinkText from '../components/LinkText/ForgetPasswordLinkText.vue'
 
 export default {
-	data () {
+	data() {
 		return {
 			request: {
 				data: {
@@ -52,24 +45,25 @@ export default {
 					password: ''
 				}
 			}
-		}
+		};
 	},
 	components: {
 		LoginButton,
-		RegisterButton
+		RegsiterLinkText,
+		ForgetPasswordLinkText
 	},
 	methods: {
 		LoginSuccess(r) {
 			this.$notify({
 				title: '登入成功',
 				type: 'success'
-			})
+			});
 			// TODO: 登入成功
 		},
 		LoginFail(r) {
 			this.$notify.error({
-				title: '登入失败',
-			})
+				title: '登入失败'
+			});
 			// TODO: 登入失败
 		}
 	}
@@ -79,12 +73,10 @@ export default {
 <style lang="stylus" scoped>
 	.title
 		letter-spacing 16px
-		font-size 32px
-		margin 8px
-	.el-row
-		// margin 20px
-	.el-col
-		margin-bottom 16px
-		margin-top 16px
-		text-align center
+		font-size 48px
+		text-align left
+		font-family sans-serif
+		font-weight 700
+	#forget-password-link-text
+		justify-content: space-between
 </style>

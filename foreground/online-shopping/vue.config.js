@@ -11,6 +11,7 @@ module.exports = {
 	assetsDir: 'assets',
 	indexPath: 'index.html',
 	lintOnSave: process.env.NODE_ENV !== 'production',
+	productionSourceMap: false,
 	pages: {
 		index: {
 			entry: 'src/index/main.js',
