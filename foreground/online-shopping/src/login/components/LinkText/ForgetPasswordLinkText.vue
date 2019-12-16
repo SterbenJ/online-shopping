@@ -3,10 +3,21 @@
 </template>
 
 <script>
+let defaultUrl = ""
+
 export default {
+	props: {
+		url: {
+			type: String,
+			required: false,
+			defautl: () => {
+				return defaultUrl
+			}
+		}
+	},
 	data () {
 		return {
-			url: 'https://www.baidu.com'
+			
 		}
 	}
 };
