@@ -4,7 +4,7 @@
 			<el-row :gutter="10" type="flex" justify="space-around">
 				<el-col :span="20">
 					<el-row>
-						<el-form :model="request.data" :rules="rules" status-icon :ref="request.formName">
+						<el-form :model="request.data" :rules="rules" status-icon :ref="formName">
 							<p class="title">登入</p>
 							<el-col>
 								<el-form-item label="账号" prop="account">
@@ -17,8 +17,7 @@
 								</el-form-item>
 							</el-col>
 							<el-col>
-								<el-button @click="submitForm()"></el-button>
-								<el-form-item><login-button id="login-button" :request="request" :validateFun="submitForm" @LoginSuccess="LoginSuccess()" @LoginFail="LoginFail()" /></el-form-item>
+								<el-form-item><login-button id="login-button" :request="request" :validateFun="submitForm" :formName="formName" :parent="this" @LoginSuccess="LoginSuccess()" @LoginFail="LoginFail()" /></el-form-item>
 							</el-col>
 						</el-form>
 					</el-row>
@@ -33,9 +32,9 @@
 </template>
 
 <script>
-import LoginButton from '../components/Button/LoginButton.vue';
-import RegsiterLinkText from '../components/LinkText/RegsiterLinkText.vue';
-import ForgetPasswordLinkText from '../components/LinkText/ForgetPasswordLinkText.vue';
+import LoginButton from '../components/button/LoginButton.vue';
+import RegsiterLinkText from '../components/linkText/RegsiterLinkText.vue';
+import ForgetPasswordLinkText from '../components/linkText/ForgetPasswordLinkText.vue';
 import config from '../config.js';
 
 export default {
@@ -48,42 +47,46 @@ export default {
 			if (!value) {
 				return callback(new Error('账号不能为空'));
 			}
-			setTimeout(() => {
-				if (value.length < config.accountMinlength) {
-					callback(new Error('必须大于 6 位'));
-				} else {
-					callback();
-				}
-			}, 100);
+			if (value.length < config.accountMinlength) {
+				callback(new Error('必须大于 6 位'));
+			} else {
+				callback();
+			}
 		};
 		// 校验密码
 		let CheckPassword = (rule, value, callback) => {
 			if (!value) {
 				return callback(new Error('密码不能为空'));
 			}
-			setTimeout(() => {
-				if (value.length < config.passwordMinlength) {
-					callback(new Error('必须大于 6 位'));
-				} else {
-					callback();
-				}
-			}, 100);
+			if (value.length < config.passwordMinlength) {
+				callback(new Error('必须大于 6 位'));
+			} else {
+				callback();
+			}
 		};
 		return {
 			request: {
 				data: {
 					account: '',
 					password: ''
-				},
-				formName: 'login-form'
+				}
 			},
+			formName: 'login-form',
 			accountMinlength: config.accountMinlength,
 			passwordMinlength: config.passwordMinlength,
 			accountMaxlength: config.accountMaxlength,
 			passwordMaxlength: config.passwordMaxlength,
 			rules: {
-				account: [{ validator: CheckAccount, trigger: 'blur' }],
-				password: [{ validator: CheckPassword, trigger: 'blur' }]
+				// account: [{ validator: CheckAccount, trigger: 'blur' }],
+				// password: [{ validator: CheckPassword, trigger: 'blur' }]
+				account: [
+					{ required: true, message: '请输入账号', trigger: 'blur' },
+					{ min: this.accountMinlength, max: this.accountMaxlength, message: `长度在 ${this.accountMinlength} 到 ${this.accountMaxlength} 个字符`, trigger: 'blur' },
+				],
+				password: [
+					{ required: true, message: '请输入密码', trigger: 'blur' },
+					{ min: this.passwordMinlength, max: this.passwordMaxlength, message: `长度在 ${this.passwordMinlength} 到 ${this.passwordMaxlength} 个字符`, trigger: 'blur' },
+				]
 			}
 		};
 	},
@@ -122,13 +125,17 @@ export default {
 		},
 		// 校验表单
 		submitForm(vm, formName) {
+			let result = false
 			vm.$refs[formName].validate(valid => {
 				if (valid) {
-					return true
+					console.log('form true')
+					result =  true
 				} else {
-					return false
+					console.log('form false')
+					result = false
 				}
 			})
+			return result
 		}
 	}
 };

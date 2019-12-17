@@ -1,4 +1,4 @@
 export default {
-	login: 'login.html',
-	register: 'register.html'
+	page: '/login.html',
+	login: '/login'
 }

@@ -3,14 +3,13 @@
 </template>
 
 <script>
-let defaultData = {
+let defaultRequestData = {
 	url: '/login',
 	method: 'POST',
 	data: {
 		account: '',
 		password: ''
-	},
-	formName: ''
+	}
 };
 
 export default {
@@ -20,30 +19,46 @@ export default {
 			type: Object,
 			required: false,
 			default: () => {
-				return defaultData
+				return defaultRequestData;
+			}
+		},
+		formName: {
+			type: String,
+			required: true,
+			default: () => {
+				return '';
 			}
 		},
 		validateFun: {
 			type: Function,
 			required: false,
 			default: () => {
-				return
+				return;
+			}
+		},
+		parent: {
+			type: Object,
+			required: true,
+			default: () => {
+				return null;
 			}
 		}
 	},
 	computed: {
 		// 合并默认值和传入了的值
 		cRequest() {
-			return Object.assign(defaultData, this.request)
+			return Object.assign(defaultRequestData, this.request);
 		}
 	},
 	methods: {
 		// http 请求
-		httpRequest() {
+		httpRequest: function() {
 			let vm = this;
-			if (vm.validateFun(vm.$parent, vm.cRequest.formNme)) {
-				vm.LoginFail()
-				return
+			if (vm.validateFun) {
+				if (!vm.validateFun(vm.parent, vm.formName)) {
+					vm.LoginFail();
+					return;
+				}
 			}
 			return vm
 				.$axios({
@@ -52,25 +67,26 @@ export default {
 					data: vm.cRequest.data
 				})
 				.then(r => {
-					vm.LoginSuccess(r)
+					vm.LoginSuccess(r);
 				})
 				.catch(r => {
-					vm.LoginFail(r)
+					vm.LoginFail(r);
 				});
 		},
 		// 登入成功
 		LoginSuccess(r) {
 			let vm = this;
-			vm.$emit('LoginSuccess', r)
+			vm.$emit('LoginSuccess', r);
 		},
 		// 登入失败
 		LoginFail(r) {
 			let vm = this;
-			vm.$emit('LoginFail', r)
+			vm.$emit('LoginFail', r);
 		}
 	}
 };
 </script>
 
 <style lang="stylus" scoped>
+
 </style>

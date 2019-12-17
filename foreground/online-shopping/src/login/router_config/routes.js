@@ -1,6 +1,7 @@
 export default [
 	{
-		path:'/login.html/',
+		name: 'login',
+		path:'/login/',
 		props: true,
 		component: () => import('../views/LoginForm.vue')
 	}

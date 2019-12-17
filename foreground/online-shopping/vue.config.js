@@ -25,6 +25,12 @@ module.exports = {
 			filename: 'login.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'login']
 		},
+		register: {
+			entry: 'src/register/main.js',
+			template: 'src/register/index.html',
+			filename: 'register.html',
+			chunks: ['chunk-vendors', 'chunk-common', 'register']
+		}
 	},
 	devServer: {
 		host: '127.0.0.1',

@@ -1,7 +1,8 @@
 export default [
 	{
-		path:'/index.html/login',
+		name: 'index',
+		path:'/index/',
 		props: true,
-		component: () => import('../../login/views/LoginForm.vue')
+		component: () => import('../compoents/commodityCard.vue')
 	}
 ]

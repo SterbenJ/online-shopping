@@ -3,7 +3,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css';
 import VueRouter from 'vue-router'
-import App from './AppLogin.vue'
+import App from './AppRegister.vue'
 
 import axios from 'axios'
 
@@ -24,7 +24,7 @@ Vue.prototype.$axios = axios
 
 
 new Vue({
-	el: '#login',
+	el: '#register',
 	router,
 	render: (h) => {
 		return h(App)

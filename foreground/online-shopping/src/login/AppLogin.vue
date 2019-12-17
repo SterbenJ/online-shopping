@@ -17,9 +17,9 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {}
 	}
-};
+}
 </script>
 
 <style lang="stylus" scoped>
