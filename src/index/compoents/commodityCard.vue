@@ -1,10 +1,8 @@
 <template>
 	<div>
-		<el-card shadow="hover">
+		<el-card id="item-card" shadow="hover" :body-style="{ padding: '0px' }">
 			<img id="item-img" :src="cItem.image_path" />
-			<div>
-				233
-			</div>
+			<div>233</div>
 		</el-card>
 	</div>
 </template>
@@ -50,4 +48,5 @@ export default {
 <style lang="stylus" scoped>
 #item-img
 	display block
+	width 100%
 </style>
