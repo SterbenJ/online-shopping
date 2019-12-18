@@ -29,7 +29,7 @@ $base-margin = 20px
 
 @font-face
 	font-family bfabc
-	src url(../../public/bfabc.woff2)
+	src url(../../../public/bfabc.woff2)
 
 .el-container
 	height $layout-height

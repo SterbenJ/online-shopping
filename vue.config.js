@@ -14,20 +14,20 @@ module.exports = {
 	productionSourceMap: false,
 	pages: {
 		index: {
-			entry: 'src/index/main.js',
-			template: 'src/index/index.html',
+			entry: 'src/pages/index/main.js',
+			template: 'src/pages/index/index.html',
 			filename: 'index.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'index']
 		},
 		login: {
-			entry: 'src/login/main.js',
-			template: 'src/login/index.html',
+			entry: 'src/pages/login/main.js',
+			template: 'src/pages/login/index.html',
 			filename: 'login.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'login']
 		},
 		register: {
-			entry: 'src/register/main.js',
-			template: 'src/register/index.html',
+			entry: 'src/pages/register/main.js',
+			template: 'src/pages/register/index.html',
 			filename: 'register.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'register']
 		}

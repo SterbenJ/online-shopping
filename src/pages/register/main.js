@@ -9,7 +9,7 @@ import axios from 'axios'
 
 import createRouter from './router_config/router.js'
 
-import baseApi from '../api/baseApi.js'
+import baseApi from '../../api/baseApi.js'
 
 
 Vue.use(VueRouter)
