@@ -1,4 +1,4 @@
+import baseApi from './baseApi.js'
 export default {
-	page: '/login.html',
 	login: '/login'
 }

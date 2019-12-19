@@ -1,12 +1,12 @@
 <template>
 	<div id="login">
 		<el-container>
-			<el-col class="aside" :lg="8" :md="12">
+			<el-col style="z-index: 10000;" class="aside" :lg="8" :md="12">
 				<el-row class="aside" type="flex" justify="center" align="middle">
 					<el-col><router-view /></el-col>
 				</el-row>
 			</el-col>
-			<el-col id="content" class="hidden-md-and-down" :lg="16">
+			<el-col id="content" class="hidden-sm-and-down" :md="12" :lg="16">
 				<p id="first-name" class="shop-name">Online</p>
 				<p id="second-name" class="shop-name">Shopping</p>
 			</el-col>
@@ -42,17 +42,23 @@ $base-margin = 20px
 	height $layout-height
 	background #409EFF
 	opacity 0.8
-	
+
 .shop-name
 	margin 0px
 	position absolute
-	font-size $big-font-size
 	color white
 	font-family bfabc
+	@media screen and (max-width: 1200px) 
+			font-size $big-font-size * 0.5
+	@media screen and (min-width: 1200px)
+			font-size $big-font-size
 	
 #first-name
 	margin-left $base-margin
-	bottom $big-font-size * 1.5 + $base-margin
+	@media screen and (max-width: 1200px)
+		bottom $big-font-size * 0.75 * 1.5 + $base-margin
+	@media screen and (min-width: 1200px)
+		bottom $big-font-size * 1.5 + $base-margin
 	
 #second-name
 	margin-right $base-margin

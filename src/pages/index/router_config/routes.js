@@ -7,7 +7,7 @@ export default [
 	},
 	{
 	name: 'index',
-	path: '/index/',
+	path: '/index.html/',
 	props: true,
 	components: {
 		content: () => import('../views/commodities.vue')

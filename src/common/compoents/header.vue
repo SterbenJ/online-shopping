@@ -1,44 +1,118 @@
 <template>
 	<el-row>
 		<el-col>
-			<el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :router="false">
-				<li id="logo">
-					<a href="">Online Shopping</a>
-				</li>
-				<el-menu-item :route="{ path: '/test' }" index="login">
+			<el-menu style="border-bottom: 0;" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :router="false">
+				<!-- logo -->
+				<li id="logo"><router-link class="a-no-line" to="/index">Online Shopping</router-link></li>
+				<!-- 搜索 -->
+				<el-col :span="10" :lg="7">
+					<el-menu-item style="border-bottom-color: transparent; text-align: center;" index="2">
+						<el-input v-model="searchInput">
+							<el-button @click="toSearch" slot="append" icon="el-icon-search"></el-button>
+						</el-input>
+					</el-menu-item>
+				</el-col>
+				<!-- 登入/用户中心按钮 -->
+				<el-menu-item class="nav-right-item" index="login">
 					<template slot="title">
-						<i class="el-icon-user"></i>
-						<span slot="title">登入</span>
+						<i class="el-icon-user"/>
+						<span slot="title">{{ userNickname ? userNickname : '登入'}}</span>
 					</template>
 				</el-menu-item>
-				<el-submenu index="2">
+				<!-- 购物车按钮 -->
+				<el-popover 
+					:open-delay="cshoppingPopper.openDelay" 
+					:close-delay="cshoppingPopper.closeDelay"
+					ref="shopping-cart-popover" 
+					trigger="hover" placement="bottom" 
+					title="title" 
+					content="content content contet"/>
+				<el-menu-item v-popover:shopping-cart-popover class="nav-right-item" index="shopping-cart">
 					<template slot="title">
-						我的工作台
+						<i class="el-icon-shopping-cart-2"></i>
+						<span slot="title">购物车</span>
+						<el-badge v-if="shoppingCartCount != 0" :value="shoppingCartCount" />
 					</template>
-					<el-menu-item index="2-1">选项1</el-menu-item>
-					<el-menu-item index="2-2">选项2</el-menu-item>
-					<el-menu-item index="2-3">选项3</el-menu-item>
-					<el-submenu :popper-append-to-body="true" index="2-4">
-						<template slot="title">
-							选项4
-						</template>
-						<el-menu-item index="2-4-1">选项1</el-menu-item>
-						<el-menu-item index="2-4-2">选项2</el-menu-item>
-						<el-menu-item index="2-4-3">选项3</el-menu-item>
-					</el-submenu>
-				</el-submenu>
-				<el-menu-item index="3" disabled>消息中心</el-menu-item>
-				<el-menu-item index="4"><a href="" target="_self">订单管理</a></el-menu-item>
+				</el-menu-item>
+				
 			</el-menu>
 		</el-col>
 	</el-row>
 </template>
 
 <script>
+import pageRoutes from '../../api/pageRoutes.js';
+import {
+  mapState,
+  mapGetters,
+  mapActions,
+  mapMutations
+} from 'vuex'
+
+// 默认配置
+const defaultConfig = {
+	// 购物车弹窗
+	shoppingPopper: {
+		openDelay: 200, // 打开延迟
+		closeDelay: 200 // 关闭延迟
+	}
+}
+
 export default {
+	data() {
+		return {
+			// 主页路径
+			indexPath: pageRoutes.index,
+			searchInput: ''
+		};
+	},
+	computed: {
+		...mapMutations([
+			
+		]),
+		...mapState([
+			
+		]),
+		...mapActions([
+			
+		]),
+		...mapGetters({
+			userNickname: 'userNickname'
+		}),
+		// 购物车商品数量
+		shoppingCartCount: () => {
+			// Todo: 异步获取
+			return 0;
+		},
+		// 购物车弹窗配置
+		cshoppingPopper: () => {
+			return defaultConfig.shoppingPopper
+		},
+		loginOrUser() {
+			return this.userNickname ? '' : pageRoutes.login // Todo: 有问题
+		}
+	},
 	methods: {
 		handleSelect(key, keyPath) {
-			console.log(key, keyPath);
+			if (key == 'login') {
+				if (this.hasLogin) {
+					this.toUserCenter();
+				} else {
+					this.toLogin();
+				}
+			}
+		},
+		// 跳转到登入页面
+		toLogin() {
+			window.open(this.loginOrUser, '_self');
+		},
+		// 跳转到用户中心
+		toUserCenter() {
+			this.$router.push({name: 'user'})
+		},
+		toSearch() {
+			// Todo: 跳转到搜索界面
+			// this.$store.commit('updateUser', {nickname: this.searchInput})
 		}
 	}
 };
@@ -47,16 +121,19 @@ export default {
 <style lang="stylus" scoped>
 @font-face
 	font-family bfabc
-	src url(../../../public/bfabc.woff2)
+	src url('../../../public/bfabc.woff2')
 #app
 	height 20px
+.nav-right-item
+	float right
 #logo
 	float left
 	line-height 61px
 #logo > a
 	font-size 20px
 	font-family bfabc
-	text-decoration none
 	color white
 	padding 0px 20px
+.a-no-line
+	text-decoration none
 </style>

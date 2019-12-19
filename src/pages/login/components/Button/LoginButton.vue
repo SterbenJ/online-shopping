@@ -3,8 +3,10 @@
 </template>
 
 <script>
+import Api from '../../../../api/loginApi.js'
+
 let defaultRequestData = {
-	url: '/login',
+	url: Api.login,
 	method: 'POST',
 	data: {
 		account: '',
@@ -52,7 +54,7 @@ export default {
 	},
 	methods: {
 		// http 请求
-		httpRequest: function() {
+		httpRequest() {
 			let vm = this;
 			if (vm.validateFun) {
 				if (!vm.validateFun(vm.parent, vm.formName)) {

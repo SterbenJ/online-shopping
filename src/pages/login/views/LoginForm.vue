@@ -17,7 +17,17 @@
 								</el-form-item>
 							</el-col>
 							<el-col>
-								<el-form-item><login-button id="login-button" :request="request" :validateFun="submitForm" :formName="formName" :parent="this" @LoginSuccess="LoginSuccess()" @LoginFail="LoginFail()" /></el-form-item>
+								<el-form-item>
+									<login-button
+										id="login-button"
+										:request="request"
+										:validateFun="submitForm"
+										:formName="formName"
+										:parent="this"
+										@LoginSuccess="LoginSuccess()"
+										@LoginFail="LoginFail()"
+									/>
+								</el-form-item>
 							</el-col>
 						</el-form>
 					</el-row>
@@ -72,34 +82,51 @@ export default {
 				}
 			},
 			formName: 'login-form',
-			accountMinlength: config.accountMinlength,
-			passwordMinlength: config.passwordMinlength,
-			accountMaxlength: config.accountMaxlength,
-			passwordMaxlength: config.passwordMaxlength,
 			rules: {
 				// account: [{ validator: CheckAccount, trigger: 'blur' }],
 				// password: [{ validator: CheckPassword, trigger: 'blur' }]
 				account: [
 					{ required: true, message: '请输入账号', trigger: 'blur' },
-					{ min: this.accountMinlength, max: this.accountMaxlength, message: `长度在 ${this.accountMinlength} 到 ${this.accountMaxlength} 个字符`, trigger: 'blur' },
+					{
+						min: config.accountMinlength,
+						max: config.accountMaxlength,
+						message: `长度在 ${config.accountMinlength} 到 ${config.accountMaxlength} 个字符`,
+						trigger: 'blur'
+					}
 				],
 				password: [
 					{ required: true, message: '请输入密码', trigger: 'blur' },
-					{ min: this.passwordMinlength, max: this.passwordMaxlength, message: `长度在 ${this.passwordMinlength} 到 ${this.passwordMaxlength} 个字符`, trigger: 'blur' },
+					{
+						min: config.passwordMinlength,
+						max: config.passwordMaxlength,
+						message: `长度在 ${config.passwordMinlength} 到 ${config.passwordMaxlength} 个字符`,
+						trigger: 'blur'
+					}
 				]
 			}
 		};
 	},
 	computed: {
-		// 根据
+		accountMinlength() {
+			return config.accountMinlength;
+		},
+		passwordMinlength() {
+			return config.passwordMinlength;
+		},
+		accountMaxlength() {
+			return config.accountMaxlength;
+		},
+		passwordMaxlength() {
+			return config.passwordMaxlength;
+		},
+		// 根据长短来显示tip
 		accountHolder() {
-			let vm = this;
-			return `${vm.accountMinlength}-${vm.accountMaxlength}位`;
+			return `${config.accountMinlength}-${config.accountMaxlength}位`;
 		},
 		passwordHolder() {
-			let vm = this;
-			return `${vm.passwordMinlength}-${vm.passwordMaxlength}位`;
+			return `${config.passwordMinlength}-${config.passwordMaxlength}位`;
 		}
+		//
 	},
 	components: {
 		LoginButton,
@@ -125,17 +152,17 @@ export default {
 		},
 		// 校验表单
 		submitForm(vm, formName) {
-			let result = false
+			let result = false;
 			vm.$refs[formName].validate(valid => {
 				if (valid) {
-					console.log('form true')
-					result =  true
+					console.log('form true');
+					result = true;
 				} else {
-					console.log('form false')
-					result = false
+					console.log('form false');
+					result = false;
 				}
-			})
-			return result
+			});
+			return result;
 		}
 	}
 };
