@@ -36,12 +36,13 @@ module.exports = {
 		host: '127.0.0.1',
 		port: 8000,
 		proxy: {
-			'/api/': {
+			'/api': {
 				target: 'http://127.0.0.1:8080',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/api': ''
-				}
+				secure: false,
+				// pathRewrite: {
+				// 	'^/api': ''
+				// }
 			}
 		},
 	},

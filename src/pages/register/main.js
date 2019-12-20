@@ -19,7 +19,7 @@ Vue.use(ElementUI)
 const router = createRouter()
 
 
-axios.defaults.baseURL = baseApi.apiPrefix
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? (baseApi.backgroundHost + baseApi.apiPrefix) : baseApi.apiPrefix,
 Vue.prototype.$axios = axios
 
 

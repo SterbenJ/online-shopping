@@ -22,7 +22,7 @@ const store = createStore()
 const router = createRouter()
 
 
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? (baseApi.backgroundHost + baseApi.apiPrefix) : baseApi.apiPrefix
 Vue.prototype.$axios = axios
 
 

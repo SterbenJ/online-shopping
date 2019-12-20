@@ -1,19 +1,19 @@
 <template>
 	<el-row>
 		<el-col>
-			<el-menu style="border-bottom: 0;" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :router="false">
+			<el-menu mode="horizontal" @select="handleSelect" background-color="#ffffff" text-color="#409EFF" active-text-color="#ffd04b" :router="false">
 				<!-- logo -->
-				<li id="logo"><router-link class="a-no-line" to="/index">Online Shopping</router-link></li>
+				<li class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{name: 'index'}">Online Shopping</router-link></li>
 				<!-- 搜索 -->
 				<el-col :span="10" :lg="7">
-					<el-menu-item style="border-bottom-color: transparent; text-align: center;" index="2">
+					<el-menu-item class="my-menu-item" style="border-bottom-color: transparent; text-align: center;" index="2">
 						<el-input v-model="searchInput">
 							<el-button @click="toSearch" slot="append" icon="el-icon-search"></el-button>
 						</el-input>
 					</el-menu-item>
 				</el-col>
 				<!-- 登入/用户中心按钮 -->
-				<el-menu-item class="nav-right-item" index="login">
+				<el-menu-item class="nav-right-item my-menu-item" index="login">
 					<template slot="title">
 						<i class="el-icon-user"/>
 						<span slot="title">{{ userNickname ? userNickname : '登入'}}</span>
@@ -27,14 +27,13 @@
 					trigger="hover" placement="bottom" 
 					title="title" 
 					content="content content contet"/>
-				<el-menu-item v-popover:shopping-cart-popover class="nav-right-item" index="shopping-cart">
+				<el-menu-item v-popover:shopping-cart-popover class="nav-right-item my-menu-item" index="shopping-cart">
 					<template slot="title">
 						<i class="el-icon-shopping-cart-2"></i>
 						<span slot="title">购物车</span>
 						<el-badge v-if="shoppingCartCount != 0" :value="shoppingCartCount" />
 					</template>
 				</el-menu-item>
-				
 			</el-menu>
 		</el-col>
 	</el-row>
@@ -132,8 +131,11 @@ export default {
 #logo > a
 	font-size 20px
 	font-family bfabc
-	color white
+	color #409EFF
 	padding 0px 20px
 .a-no-line
 	text-decoration none
+.my-menu-item
+	border 0
+	height 61px
 </style>
