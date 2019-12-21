@@ -15,6 +15,9 @@
 				<el-col :span="22" :offset="1" :lg="{ span: 16, offset: 4 }"><router-view name="content" /></el-col>
 			</el-row>
 		</div>
+		<div>
+			<router-view name="commodity"></router-view>
+		</div>
 		<div class="footer">
 			<my-footer />
 		</div>

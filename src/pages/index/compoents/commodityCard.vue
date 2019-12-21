@@ -18,51 +18,27 @@
 				</span>
 			</div>
 			<div class="text-block">
-				<span class="msg-text small-text address p-oneline" >产地 {{cItem.address}}</span>
-				<span class="msg-text small-text sales p-oneline" >销量{{ cItem.sales }}</span>
+				<span class="msg-text small-text address p-oneline">产地 {{ cItem.address }}</span>
+				<span class="msg-text small-text sales p-oneline">销量{{ cItem.sales }}</span>
 			</div>
 		</div>
 	</el-card>
 </template>
 
 <script>
-// 默认商品信息
-const defaultItem = {
-	item_id: '',
-	name: '商品名称',
-	price: 233.33,
-	sales: 666,
-	image_path: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-	shop_id: '',
-	address: '产地',
-	tags: ['标签一', '我是标签']
-};
+
+import baseCommodityCompoent from './baseCommodityCompoent.vue';
 
 export default {
+	extends: baseCommodityCompoent,
 	data() {
 		return {};
 	},
 	props: {
-		// 商品信息对象
-		item: {
-			type: Object,
-			required: true,
-			default: () => {
-				return defaultItem;
-			}
-		}
 	},
 	methods: {
-		// 打开商品详情页面
-		openProductDetails() {
-			this.$router.replace({ name: 'commodity', params: {}})
-		}
 	},
 	computed: {
-		// 合并默认和传入值
-		cItem() {
-			return Object.assign(defaultItem, this.item);
-		},
 		// 把价格小数点前后拆开
 		priceStringArr() {
 			return this.cItem.price.toString().split('.');
@@ -85,10 +61,9 @@ export default {
 	margin 0px
 	display table
 	content ''
-.p-oneline {
+.p-oneline
 	display inline-block
 	width 50%
-}
 .sales
 	text-align right
 .address
