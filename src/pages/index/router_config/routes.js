@@ -10,6 +10,6 @@ export default [
 	path: '/index.html/',
 	props: true,
 	components: {
-		content: () => import('../views/commodities.vue')
+		content: () => import('../views/commoditiesView.vue')
 	}
 }]

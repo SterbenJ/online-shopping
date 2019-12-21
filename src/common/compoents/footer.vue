@@ -2,9 +2,9 @@
 	<div class="container">
 		<div class="footer-main">
 			<h4 class="title">链接</h4>
-			<a class="link" href="https://github.com/ASP-NET-lesson-design">代码仓库</a>
-			<a class="link" href="https://github.com/SterbenJ">前端作者@NoraH1to</a>
-			<a class="link" href="https://github.com/WEGFan">后端作者@WEGFan</a>
+			<a class="link" target="_blank" href="https://github.com/ASP-NET-lesson-design">代码仓库</a>
+			<a class="link" target="_blank" href="https://github.com/SterbenJ">前端作者@NoraH1to</a>
+			<a class="link" target="_blank" href="https://github.com/WEGFan">后端作者@WEGFan</a>
 		</div>
 		<div class="footer-main"></div>
 	</div>

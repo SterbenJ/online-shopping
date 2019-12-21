@@ -8,7 +8,7 @@
 				<el-col :span="10" :lg="7">
 					<el-menu-item class="my-menu-item" style="border-bottom-color: transparent; text-align: center;" index="2">
 						<el-input v-model="searchInput">
-							<el-button @click="toSearch" slot="append" icon="el-icon-search"></el-button>
+							<el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button>
 						</el-input>
 					</el-menu-item>
 				</el-col>

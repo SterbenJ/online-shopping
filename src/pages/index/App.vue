@@ -3,6 +3,13 @@
 		<div class="my-header" style="height: 60px;">
 			<my-header id="my-header" />
 		</div>
+		<div class="banner">
+			<el-row>
+				<el-col :span="22" :offset="1" :lg="{ span: 16, offset: 4 }">
+					<banner-view />
+				</el-col>
+			</el-row>
+		</div>
 		<div class="content">
 			<el-row>
 				<el-col :span="22" :offset="1" :lg="{ span: 16, offset: 4 }"><router-view name="content" /></el-col>
@@ -15,7 +22,8 @@
 </template>
 
 <script>
-import MyHeader from '../../common/compoents/header.vue';
+import MyHeader from '../../common/compoents/header.vue'
+import bannerView from './views/bannerView.vue'
 import MyFooter from '../../common/compoents/footer.vue'
 
 export default {
@@ -24,6 +32,7 @@ export default {
 	},
 	components: {
 		MyHeader,
+		bannerView,
 		MyFooter
 	},
 	methods: {},
@@ -41,6 +50,7 @@ $nav-height = 60px
 	position fixed
 	top 0
 .content
+.banner
 	margin-top $nav-height
 .footer
 	margin-top $nav-height
