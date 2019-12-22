@@ -3,5 +3,6 @@ import baseApi from './baseApi.js'
 export default {
 	login: baseApi.foregroundHost + '/login.html',
 	index: baseApi.foregroundHost + '/index.html',
-	commodity: baseApi.foregroundHost + '/commodity.html'
+	commodity: baseApi.foregroundHost + '/commodity.html',
+	userCenter: baseApi.foregroundHost + '/userCenter.html'
 }

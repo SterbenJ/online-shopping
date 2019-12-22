@@ -30,12 +30,6 @@ module.exports = {
 			template: 'src/pages/register/index.html',
 			filename: 'register.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'register']
-		},
-		commodity: {
-			entry: 'src/pages/commodity/main.js',
-			template: 'src/pages/commodity/index.html',
-			filename: 'commodity.html',
-			chunks: ['chunk-vendors', 'chunk-common', 'commodity']
 		}
 	},
 	devServer: {

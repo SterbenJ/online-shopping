@@ -31,7 +31,8 @@ export default {
 	methods: {
 		// 打开商品详情页面
 		openProductDetails: function() {
-			window.open(pageRoutes.commodity.concat('/' + this.cItem.item_id), '_blank')
+			// window.open(pageRoutes.commodity.concat('/' + this.cItem.item_id), '_blank')
+			this.$router.push({ name: 'commodity', params: { item_id: this.cItem.item_id } })
 		}
 	},
 	computed: {

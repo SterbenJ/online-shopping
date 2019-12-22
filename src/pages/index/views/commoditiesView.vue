@@ -30,7 +30,7 @@ export default {
 			let vm = this
 			vm.loading = true
 			vm.$axios({
-				method: 'POST',
+				method: 'GET',
 				url: commodityApi.indexItemList
 			})
 			.then(r => {

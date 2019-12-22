@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Api from '../../../../api/loginApi.js'
+import Api from '../../../../api/userApi.js'
 
 let defaultRequestData = {
 	url: Api.login,

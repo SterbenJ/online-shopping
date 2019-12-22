@@ -3,30 +3,33 @@
 		<el-col>
 			<el-menu mode="horizontal" @select="handleSelect" background-color="#ffffff" text-color="#409EFF" active-text-color="#ffd04b" :router="false">
 				<!-- logo -->
-				<li class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{name: 'index'}">Online Shopping</router-link></li>
+				<li class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{ name: 'index' }">Online Shopping</router-link></li>
 				<!-- 搜索 -->
 				<el-col :span="10" :lg="7">
 					<el-menu-item class="my-menu-item" style="border-bottom-color: transparent; text-align: center;" index="2">
-						<el-input v-model="searchInput">
-							<el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button>
-						</el-input>
+						<el-input v-model="searchInput"><el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button></el-input>
 					</el-menu-item>
 				</el-col>
 				<!-- 登入/用户中心按钮 -->
-				<el-menu-item class="nav-right-item my-menu-item" index="login">
+				<el-popover :open-delay="cuserPopper.openDelay" :close-delay="cuserPopper.closeDelay" ref="user-popover" trigger="hover" placement="bottom">
+					<simple-user-info></simple-user-info>
+				</el-popover>
+				<el-menu-item v-popover:user-popover class="nav-right-item my-menu-item" index="login">
 					<template slot="title">
-						<i class="el-icon-user"/>
-						<span slot="title">{{ userNickname ? userNickname : '登入'}}</span>
+						<i class="el-icon-user" />
+						<span slot="title">{{ userNickname ? userNickname : '登入' }}</span>
 					</template>
 				</el-menu-item>
 				<!-- 购物车按钮 -->
-				<el-popover 
-					:open-delay="cshoppingPopper.openDelay" 
+				<el-popover
+					:open-delay="cshoppingPopper.openDelay"
 					:close-delay="cshoppingPopper.closeDelay"
-					ref="shopping-cart-popover" 
-					trigger="hover" placement="bottom" 
-					title="title" 
-					content="content content contet"/>
+					ref="shopping-cart-popover"
+					trigger="hover"
+					placement="bottom"
+					title="title"
+					content="content content contet"
+				/>
 				<el-menu-item v-popover:shopping-cart-popover class="nav-right-item my-menu-item" index="shopping-cart">
 					<template slot="title">
 						<i class="el-icon-shopping-cart-2"></i>
@@ -41,12 +44,8 @@
 
 <script>
 import pageRoutes from '../../api/pageRoutes.js';
-import {
-  mapState,
-  mapGetters,
-  mapActions,
-  mapMutations
-} from 'vuex'
+import simpleUserInfo from './simpleUserInfo.vue';
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 
 // 默认配置
 const defaultConfig = {
@@ -54,8 +53,13 @@ const defaultConfig = {
 	shoppingPopper: {
 		openDelay: 200, // 打开延迟
 		closeDelay: 200 // 关闭延迟
+	},
+	// 用户信息弹窗
+	userPopper: {
+		openDelay: 200, // 打开延迟
+		closeDelay: 200 // 关闭延迟
 	}
-}
+};
 
 export default {
 	data() {
@@ -65,16 +69,11 @@ export default {
 			searchInput: ''
 		};
 	},
+	components: {
+		simpleUserInfo
+	},
 	computed: {
-		...mapMutations([
-			
-		]),
-		...mapState([
-			
-		]),
-		...mapActions([
-			
-		]),
+		...mapState([]),
 		...mapGetters({
 			userNickname: 'userNickname'
 		}),
@@ -85,30 +84,27 @@ export default {
 		},
 		// 购物车弹窗配置
 		cshoppingPopper: () => {
-			return defaultConfig.shoppingPopper
+			return defaultConfig.shoppingPopper;
 		},
-		loginOrUser() {
-			return this.userNickname ? '' : pageRoutes.login // Todo: 有问题
+		cuserPopper: () => {
+			return defaultConfig.userPopper;
+		},
+		loginOrUserUrl() {
+			return this.userNickname ? pageRoutes.userCenter : pageRoutes.login;
 		}
 	},
 	methods: {
+		// 分发点击 header item 的事件
 		handleSelect(key, keyPath) {
 			if (key == 'login') {
-				if (this.hasLogin) {
-					this.toUserCenter();
-				} else {
-					this.toLogin();
-				}
+				this.toLoginOrUser();
 			}
 		},
-		// 跳转到登入页面
-		toLogin() {
-			window.open(this.loginOrUser, '_self');
+		// 跳转到登入页面/用户中心
+		toLoginOrUser() {
+			window.open(this.loginOrUserUrl, '_self');
 		},
-		// 跳转到用户中心
-		toUserCenter() {
-			this.$router.push({name: 'user'})
-		},
+		// 跳转到搜索页面
 		toSearch() {
 			// Todo: 跳转到搜索界面
 			// this.$store.commit('updateUser', {nickname: this.searchInput})
@@ -121,6 +117,8 @@ export default {
 @font-face
 	font-family bfabc
 	src url('../../../public/bfabc.woff2')
+.el-menu
+	box-shadow 0px 1px 5px gray
 #app
 	height 20px
 .nav-right-item

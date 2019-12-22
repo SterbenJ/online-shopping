@@ -1,5 +1,6 @@
 export default {
 	updateUser(state, newUser) {
-		state.user = newUser
+		console.log(newUser)
+		state.user = {...newUser}
 	}
 }

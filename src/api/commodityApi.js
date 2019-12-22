@@ -1,3 +1,4 @@
 export default {
-	indexItemList: '/indexItemList'
+	indexItemList: '/indexItemList',
+	indexBannerList: '/indexBannerList'
 }

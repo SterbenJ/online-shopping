@@ -1,22 +1,46 @@
 <template>
-	<el-carousel class="my-banner" indicator-position="inside">
-		<el-carousel-item v-for="item in 10" :key="item">
-			<banner-content/>
+	<el-carousel v-loading="loading" class="my-banner" indicator-position="inside">
+		<el-carousel-item v-for="(obj, index) in indexBannerList" :key="obj.item_id">
+			<banner-content :item="obj"/>
 		</el-carousel-item>
 	</el-carousel>
 </template>
 
 <script>
+import commodityApi from '../../../api/commodityApi.js'
 import bannerContent from '../compoents/bannerContent.vue'
 	
 export default {
 	data() {
-		return {};
+		return {
+			indexBannerList: [],
+			loading: true
+		};
 	},
 	components: {
 		bannerContent,
 	},
 	methods: {
+		// 获取主页 banner 列表
+		getIndexBannerList() {
+			let vm = this
+			vm.loading = true
+			vm.$axios({
+				method: 'get',
+				url: commodityApi.indexBannerList
+			})
+			.then(r => {
+				vm.indexBannerList = r.data.data.indexBannerList
+				vm.loading = false
+			})
+			.catch(r => {
+				console.log('list fail')
+				vm.loading = false
+			})
+		}
+	},
+	mounted() {
+		this.getIndexBannerList()
 	}
 };
 </script>
