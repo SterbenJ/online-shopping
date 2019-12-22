@@ -14,5 +14,9 @@ export default {
 	// 用户积分
 	userPoint (state) {
 		return state.user ? state.user.point : false
+	},
+	// 购物车数量
+	userShoppingCartCount (state) {
+		return state.user ? state.user.shopping_cart_count : false
 	}
 }

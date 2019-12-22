@@ -1,4 +1,5 @@
 export default {
 	indexItemList: '/indexItemList',
-	indexBannerList: '/indexBannerList'
+	indexBannerList: '/indexBannerList',
+	itemInfo: '/itemInfo'
 }

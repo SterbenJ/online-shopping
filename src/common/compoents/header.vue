@@ -34,7 +34,7 @@
 					<template slot="title">
 						<i class="el-icon-shopping-cart-2"></i>
 						<span slot="title">购物车</span>
-						<el-badge v-if="shoppingCartCount != 0" :value="shoppingCartCount" />
+						<el-badge v-if="userShoppingCartCount" :value="userShoppingCartCount" />
 					</template>
 				</el-menu-item>
 			</el-menu>
@@ -75,13 +75,9 @@ export default {
 	computed: {
 		...mapState([]),
 		...mapGetters({
-			userNickname: 'userNickname'
+			userNickname: 'userNickname',
+			userShoppingCartCount: 'userShoppingCartCount'
 		}),
-		// 购物车商品数量
-		shoppingCartCount: () => {
-			// Todo: 异步获取
-			return 0;
-		},
 		// 购物车弹窗配置
 		cshoppingPopper: () => {
 			return defaultConfig.shoppingPopper;

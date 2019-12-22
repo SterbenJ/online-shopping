@@ -45,7 +45,6 @@ export default {
 				url: userApi.userInfo
 			})
 				.then(r => {
-					console.log(r.data.data.user);
 					vm.updateUser(r.data.data.user);
 				})
 				.catch(r => {
