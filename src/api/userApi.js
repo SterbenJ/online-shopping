@@ -1,5 +1,6 @@
+const base = '/user'
 export default {
-	login: '/login',
-	userInfo: '/user',
-	hasLogin: '/hasLogin'
+	login: base + '/login',
+	userInfo: base + '/info',
+	hasLogin: base + '/hasLogin'
 }
