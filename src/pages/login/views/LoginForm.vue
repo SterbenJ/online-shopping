@@ -45,7 +45,10 @@
 import LoginButton from '../components/button/LoginButton.vue';
 import RegsiterLinkText from '../components/linkText/RegsiterLinkText.vue';
 import ForgetPasswordLinkText from '../components/linkText/ForgetPasswordLinkText.vue';
+
+
 import config from '../config.js';
+import pageRoutes from '../../../api/pageRoutes.js';
 
 export default {
 	data() {
@@ -125,6 +128,10 @@ export default {
 		},
 		passwordHolder() {
 			return `${config.passwordMinlength}-${config.passwordMaxlength}位`;
+		},
+		// 从哪跳转来，默认首页
+		fromWhere() {
+			return this.$route.query ? this.$route.query.fromWhere : pageRoutes.index
 		}
 		//
 	},
@@ -140,6 +147,8 @@ export default {
 				title: '登入成功',
 				type: 'success'
 			});
+			console.log(this.fromWhere)
+			window.open(this.fromWhere, '_self')
 			// TODO: 登入成功
 		},
 		// 失败登入调用

@@ -2,8 +2,8 @@
 	<div>
 		<el-row>
 			<el-col :span="22" :offset="1" :lg="{ span: 16, offset: 4 }">
-				<el-row type="flex">
-					<el-col class="main-contain" :span="12" :lg="{ span: 10 }">
+				<el-row >
+					<el-col class="main-contain" :span="11" :lg="{ span: 9 }">
 						<el-card class="img-contain" :body-style="{padding: '0px'}">
 							<el-image
 							style="{ align-content: center; width: 100%;}"
@@ -11,7 +11,7 @@
 							:src="itemInfo.image_path" />
 						</el-card>
 					</el-col>
-					<el-col :span="12" :lg="{ span: 14 }">
+					<el-col :span="11" :lg="{ span: 13 }">
 						<el-card class="info-contain main-contain" :body-style="{ padding: '0px' }">
 							<el-row>
 								<el-col>
@@ -135,5 +135,5 @@ export default {
 	h1, h2, p
 		padding 0.9375rem
 .action-contain
-	margin-top 0.9375rem
+	margin 1.25rem 1.5rem
 </style>

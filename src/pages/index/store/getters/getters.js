@@ -3,6 +3,10 @@ export default {
 	loginState (state) {
 		return state.user ? true : false
 	},
+	// 用户ID
+	userID (state) {
+		return state.user ? state.user.user_id : false
+	},
 	// 用户名称
 	userNickname (state) {
 		return state.user ? state.user.nickname : false

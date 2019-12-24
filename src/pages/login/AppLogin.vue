@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import pageRoutes from '../../api/pageRoutes.js'
 export default {
 	data() {
 		return {}

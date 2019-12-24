@@ -19,7 +19,10 @@
 import toTopButton from '../../common/compoents/toTopButton.vue';
 import MyHeader from '../../common/compoents/header.vue';
 import MyFooter from '../../common/compoents/footer.vue';
+
 import userApi from '../../api/userApi.js';
+import stateCode from '../../api/stateCode.js'
+
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -37,22 +40,56 @@ export default {
 		})
 	},
 	methods: {
-		// 请求当前 session 的用户信息
+		// 请求用户信息
 		requestUserInfo: function() {
+			let vm = this;
+			// 如果没登入
+			vm.$axios({
+				method: 'GET',
+				url: userApi.hasLogin
+			})
+				.then(r => {
+					if (r.data.code == 200 && r.data.data.hasLogin) {
+						console.log("getUserInfo")
+						vm.getUserInfo()
+					}
+				})
+				.catch(r => {
+					console.log('userInfo error 1');
+					vm.$notify({
+						title: '获取用户信息失败',
+						type: 'error',
+						offset: 80
+					});
+				});
+		},
+		// 获取用户信息
+		getUserInfo: function() {
 			let vm = this;
 			vm.$axios({
 				method: 'GET',
 				url: userApi.userInfo
 			})
 				.then(r => {
-					vm.updateUser(r.data.data.user);
+					if (r.data.code == 200) {
+						vm.updateUser(r.data.data.user);
+					} else {
+						vm.$notify({
+							title: '获取用户信息失败',
+							message: r.data.message ? r.data.message : '',
+							type: 'error',
+							offset: 80
+						});
+					}
 				})
 				.catch(r => {
+					console.log('userInfo error 2');
 					vm.$notify({
-						message: '获取用户信息失败',
-						type: 'error'
+						title: '获取用户信息失败',
+						type: 'error',
+						offset: 80
 					});
-				});
+				})
 		},
 		...mapMutations({
 			updateUser: 'updateUser'
@@ -76,5 +113,5 @@ $nav-height = 60px
 .content
 	margin-top $nav-height
 .footer
-	margin-top $nav-height
+	margin-top $nav-height * 3
 </style>

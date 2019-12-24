@@ -1,12 +1,12 @@
 <template>
 	<el-row>
-		<el-col>
-			<el-menu mode="horizontal" @select="handleSelect" background-color="#ffffff" text-color="#409EFF" active-text-color="#ffd04b" :router="false">
+		<el-col style="height: 61px;">
+			<el-menu style="border-bottom: 0px;" mode="horizontal" @select="handleSelect" background-color="#ffffff" text-color="#409EFF" active-text-color="#409EFF" :router="true">
 				<!-- logo -->
-				<li class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{ name: 'index' }">Online Shopping</router-link></li>
+				<el-menu-item index="index" :route="{ name: 'index'}" class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{ name: 'index' }">Online Shopping</router-link></el-menu-item>
 				<!-- 搜索 -->
 				<el-col :span="10" :lg="7">
-					<el-menu-item class="my-menu-item" style="border-bottom-color: transparent; text-align: center;" index="2">
+					<el-menu-item index="search" class="my-menu-item" style="border-bottom-color: transparent; text-align: center;">
 						<el-input v-model="searchInput"><el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button></el-input>
 					</el-menu-item>
 				</el-col>
@@ -14,23 +14,14 @@
 				<el-popover :open-delay="cuserPopper.openDelay" :close-delay="cuserPopper.closeDelay" ref="user-popover" trigger="hover" placement="bottom">
 					<simple-user-info></simple-user-info>
 				</el-popover>
-				<el-menu-item v-popover:user-popover class="nav-right-item my-menu-item" index="login">
+				<el-menu-item index="login" :route="{ name: 'userCenter', params: { user_id: userID } }" v-popover:user-popover class="nav-right-item my-menu-item">
 					<template slot="title">
 						<i class="el-icon-user" />
 						<span slot="title">{{ userNickname ? userNickname : '登入' }}</span>
 					</template>
 				</el-menu-item>
 				<!-- 购物车按钮 -->
-				<el-popover
-					:open-delay="cshoppingPopper.openDelay"
-					:close-delay="cshoppingPopper.closeDelay"
-					ref="shopping-cart-popover"
-					trigger="hover"
-					placement="bottom"
-					title="title"
-					content="content content contet"
-				/>
-				<el-menu-item v-popover:shopping-cart-popover class="nav-right-item my-menu-item" index="shopping-cart">
+				<el-menu-item :route="{ name: 'shoppingCart', params: { user_id: userID } }" class="nav-right-item my-menu-item" index="shopping-cart">
 					<template slot="title">
 						<i class="el-icon-shopping-cart-2"></i>
 						<span slot="title">购物车</span>
@@ -64,9 +55,8 @@ const defaultConfig = {
 export default {
 	data() {
 		return {
-			// 主页路径
-			indexPath: pageRoutes.index,
-			searchInput: ''
+			// 搜索框内容
+			searchInput: '',
 		};
 	},
 	components: {
@@ -76,7 +66,9 @@ export default {
 		...mapState([]),
 		...mapGetters({
 			userNickname: 'userNickname',
-			userShoppingCartCount: 'userShoppingCartCount'
+			userShoppingCartCount: 'userShoppingCartCount',
+			loginState: 'loginState',
+			userID: 'userID'
 		}),
 		// 购物车弹窗配置
 		cshoppingPopper: () => {
@@ -84,27 +76,13 @@ export default {
 		},
 		cuserPopper: () => {
 			return defaultConfig.userPopper;
-		},
-		loginOrUserUrl() {
-			return this.userNickname ? pageRoutes.userCenter : pageRoutes.login;
 		}
 	},
 	methods: {
 		// 分发点击 header item 的事件
 		handleSelect(key, keyPath) {
-			if (key == 'login') {
-				this.toLoginOrUser();
-			}
+			
 		},
-		// 跳转到登入页面/用户中心
-		toLoginOrUser() {
-			window.open(this.loginOrUserUrl, '_self');
-		},
-		// 跳转到搜索页面
-		toSearch() {
-			// Todo: 跳转到搜索界面
-			// this.$store.commit('updateUser', {nickname: this.searchInput})
-		}
 	}
 };
 </script>

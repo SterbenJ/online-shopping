@@ -1,7 +1,12 @@
 <template>
-	<el-row>
-		<el-button @click="addItemToShoppingCart" type="primary" round>加入购物车</el-button>
-		<el-button @click="addItemToCollection" type="warning" :icon="citemInfo.collected ? 'el-icon-star-on' : 'el-icon-star-off'" round>{{ citemInfo.collected ? '取消收藏' : '收藏' }}</el-button>
+	<el-row gutter="20">
+		<el-col :span="24"><el-input-number class="action-item" :step="1" :precision="0" size="medium" v-model="count" :min="1" :max="99" label="数量"/></el-col>
+		<el-col :span="24"><el-button class="action-item" @click="addItemToShoppingCart" type="primary" round>加入购物车</el-button></el-col>
+		<el-col :span="24">
+			<el-button class="action-item" @click="addItemToCollection" type="warning" :icon="citemInfo.collected ? 'el-icon-star-on' : 'el-icon-star-off'" round>
+				{{ citemInfo.collected ? '取消收藏' : '收藏' }}
+			</el-button>
+		</el-col>
 	</el-row>
 </template>
 
@@ -36,16 +41,18 @@ export default {
 			type: Object,
 			required: true,
 			default: () => {
-				return defaultInfo
+				return defaultInfo;
 			}
 		}
 	},
 	data() {
-		return {};
+		return {
+			count: 1
+		};
 	},
 	computed: {
 		citemInfo: function() {
-			return Object.assign(defaultInfo, this.itemInfo)
+			return Object.assign(defaultInfo, this.itemInfo);
 		}
 	},
 	methods: {
@@ -60,29 +67,33 @@ export default {
 			let vm = this;
 			vm.$axios({
 				method: 'POST',
-				url: commodityApi.addItemToShoppingCart
-			}) // Todo: 更改响应接受数据
+				url: commodityApi.addItemToShoppingCart,
+				data: {
+					itemID: vm.citemInfo.item_id,
+					count: vm.count
+				}
+			})
 				.then(r => {
-					console.log('add cart success');
 					vm.updateUserAsync({
 						shopping_cart_count: r.data.data.shopping_cart_count
 					});
 					vm.$notify({
 						title: '添加购物车成功',
-						type: 'success'
+						type: 'success',
+						offset: 80
 					});
 				})
 				.catch(r => {
 					vm.$notify({
 						title: '添加购物车失败',
-						type: 'error'
+						type: 'error',
+						offset: 80
 					});
 				});
 		},
 		// 加入收藏
 		addItemToCollection: function() {
 			let vm = this;
-			vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, {collected: !vm.citemInfo.collected }))
 			vm.$axios({
 				method: 'POST',
 				url: commodityApi.addItemToCollection
@@ -91,31 +102,33 @@ export default {
 					if (r.data.code == stateCode.collectSuccess) {
 						vm.$notify({
 							title: '成功添加至收藏夹',
-							type: 'success'
+							type: 'success',
+							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, {collected: r.data.data.result }))
-					}
-					else if (r.data.code == stateCode.uncollectSuccess) {
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
+					} else if (r.data.code == stateCode.uncollectSuccess) {
 						vm.$notify({
 							title: '成功取消收藏',
-							type: 'success'
+							type: 'success',
+							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, {collected: r.data.data.result }))
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
 					} else {
 						vm.$notify({
 							title: '操作失败',
 							message: r.data ? r.data.message : '',
-							type: 'error'
+							type: 'error',
+							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, {collected: r.data.data.result }))
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
 					}
-					
 				})
 				.catch(r => {
 					vm.$notify({
 						title: '操作失败',
 						message: r.data ? r.data.message : '',
-						type: 'error'
+						type: 'error',
+						offset: 80
 					});
 				});
 		}
@@ -123,4 +136,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="stylus" scoped>
+.action-item
+	margin 0.625rem 1.25rem
+	width 94%
+</style>
