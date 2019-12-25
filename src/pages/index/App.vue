@@ -23,7 +23,7 @@ import MyFooter from '../../common/compoents/footer.vue';
 import userApi from '../../api/userApi.js';
 import stateCode from '../../api/stateCode.js'
 
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
 	data() {

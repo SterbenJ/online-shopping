@@ -8,8 +8,21 @@ export default {
 		orderState: {
 			
 		}
-	}
+	},
+	data () {
+		return {
+			
+		}
+	},
+	computed: {
+		
+	},
+	methods: {
+		
+	},
 };
 </script>
 
-<style></style>
+<style lang="stylus" scoped>
+	
+</style>

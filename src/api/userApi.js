@@ -1,4 +1,5 @@
 const base = '/user'
+
 export default {
 	login: base + '/login',
 	logout: base + '/logout',

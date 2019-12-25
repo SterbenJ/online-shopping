@@ -12,9 +12,11 @@ export default [{
 	{
 		name: 'index',
 		path: '/index.html',
-		props: true,
 		components: {
 			content: () => import('../views/contentView.vue')
+		},
+		props: {
+			content: true
 		}
 	},
 	// 商品详情
@@ -35,6 +37,10 @@ export default [{
 		components: {
 			content: () => import('../views/userCenterView.vue')
 		},
+		// 默认子路由-购物车
+		redirect: {
+			name: 'shoppingCart'
+		},
 		props: {
 			content: true
 		},
@@ -44,10 +50,21 @@ export default [{
 				name: 'shoppingCart',
 				path: '/index.html/userCenter/:user_id/shoppingCart',
 				components: {
-					// Todo: 购物车
+					main: () => import('../views/shoppingCartItemListView.vue')
 				},
 				props: {
-					
+					main: true
+				}
+			},
+			// 订单列表
+			{
+				name: 'orderList',
+				path: '/index.html/userCenter/:user_id/orderList/:finished',
+				components: {
+					main: () => import('../views/orderListView.vue')
+				},
+				props: {
+					main: true
 				}
 			}
 		]

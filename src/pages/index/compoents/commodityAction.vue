@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import commodityApi from '../../../api/commodityApi.js';
+import collectionApi from '../../../api/collectionApi.js';
+import shoppingCartApi from '../../../api/shoppingCartApi.js';
 import { mapMutations, mapActions } from 'vuex';
 import stateCode from '../../../api/stateCode.js';
 
@@ -67,7 +68,7 @@ export default {
 			let vm = this;
 			vm.$axios({
 				method: 'POST',
-				url: commodityApi.addItemToShoppingCart,
+				url: shoppingCartApi.addItem,
 				data: {
 					itemID: vm.citemInfo.item_id,
 					count: vm.count
@@ -96,7 +97,7 @@ export default {
 			let vm = this;
 			vm.$axios({
 				method: 'POST',
-				url: commodityApi.addItemToCollection
+				url: collectionApi.addItem
 			})
 				.then(r => {
 					if (r.data.code == stateCode.collectSuccess) {
