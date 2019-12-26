@@ -79,13 +79,13 @@ export default [{
 		props: {
 			content: true
 		},
-		beforeEnter: (to, from, next)=> {
-			if (to.params.item_list) {
-				next()
-			} else {
-				next({ name: 'index'})
-			}
-		},
+		// beforeEnter: (to, from, next)=> {
+		// 	if (to.params.item_list) {
+		// 		next()
+		// 	} else {
+		// 		next({ name: 'index'})
+		// 	}
+		// },
 	},
 	// 创建订单
 	{

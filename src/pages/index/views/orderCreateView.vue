@@ -2,7 +2,7 @@
 	<el-row>
 		<el-col :lg="{ span: 16, offset: 4}" :span="22" :offset="1">
 			<el-card :body-style="{ margin: '1.875rem' }" shadow="never">
-				
+
 				<el-row class="form-info">
 					<el-col :lg="{ span: 18, offset: 3}" :span="22" :offset="1">
 						<el-form label-width="auto" label-position="left" ref="form" :model="formData" :rules="rules">
@@ -21,9 +21,9 @@
 						</el-form>
 					</el-col>
 				</el-row>
-				
+
 				<el-divider></el-divider>
-				
+
 				<el-row class="form-items">
 					<el-col :span="22" :offset="1">
 						<el-row>
@@ -33,16 +33,16 @@
 						</el-row>
 					</el-col>
 				</el-row>
-				
+
 				<el-divider></el-divider>
-				
+
 				<transition name="el-fade-in-linear" :appear="true">
 					<el-row class="form-action" type="flex" justify="end" align="middle">
 						<span>总价：<span class="price">￥{{totlaPrice}}</span></span>
-						<el-button class="btn-pay" type="success" round>提交订单</el-button>
+						<el-button @click="createOrder" :loading="loading" class="btn-pay" type="success" round>提交订单</el-button>
 					</el-row>
 				</transition>
-				
+
 			</el-card>
 		</el-col>
 	</el-row>
@@ -51,11 +51,13 @@
 <script>
 import baseOrderView from './baseOrderView.vue'
 import orderItemInfo from '../compoents/orderItemInfo.vue'
-	
+
+import orderApi from '../../../api/orderApi.js'
+
 export default {
 	extends: baseOrderView,
 	props: {
-		
+
 	},
 	components: {
 		'orderItemInfo': orderItemInfo
@@ -70,6 +72,7 @@ export default {
 			}
 		}
 		return {
+			loading: false,
 			formData: {
 				acceptUserName: '',
 				acceptUserAddress: '',
@@ -119,10 +122,62 @@ export default {
 		// 提交订单
 		createOrder() {
 			// Todo: 提交订单
+			let vm = this;
+			if (!vm.submitForm(vm, 'form')) {
+				vm.fail();
+				return
+			}
+			vm.loading = true;
+			vm.$axios({
+				method: 'POST',
+				url: orderApi.create
+			})
+				.then(r => {
+					vm.loading = false;
+					if (r.data.code == 200) {
+						vm.success();
+					} else {
+						vm.fail(r.data.message);
+					}
+				})
+				.catch(e => {
+					vm.loading = false;
+					vm.fail();
+				});
+		},
+		// 校验表单
+		submitForm(vm, formName) {
+			let result = false;
+			vm.$refs[formName].validate(valid => {
+				if (valid) {
+					console.log('form true');
+					result = true;
+				} else {
+					console.log('form false');
+					result = false;
+				}
+			});
+			return result;
+		},
+		// 创建成功
+		success() {
+			this.$notify({
+				title: '创建成功',
+				type: 'success'
+			})
+			// Todo: 跳转订单信息
+		},
+		// 创建失败
+		fail(message) {
+			this.$notify({
+				title: '创建失败',
+				message: message ? message : '',
+				type: 'error'
+			})
 		}
 	},
 	mounted() {
-		
+
 	}
 };
 </script>

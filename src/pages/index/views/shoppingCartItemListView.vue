@@ -1,20 +1,19 @@
 <template>
 	<div v-loading="loading">
-		<div v-for="(obj, index) in itemList" :key="obj.itemInfo.item_id">
-			<el-col :span="1">
-				<input class="my-checkbox" :value="obj.itemInfo.item_id" v-model="selectedList" type="checkbox" />
-			</el-col>
-			<el-col :span="23">
-				<transition name="el-fade-in-linear" :appear="true">
-					<shopping-cart-item @removeItem="deleteItem" class="test" :ref="obj.itemInfo.item_id" :item="obj.itemInfo" v-model="obj.count" />
-				</transition>
-			</el-col>
-		</div>
+		<transition-group name="el-fade-in-linear" :appear="true">
+			<div v-for="(obj, index) in itemList" :key="obj.itemInfo.item_id">
+				<el-col :span="1"><input class="my-checkbox" :value="obj.itemInfo.item_id" v-model="selectedList" type="checkbox" /></el-col>
+				<el-col :span="23"><shopping-cart-item @removeItem="deleteItem" class="test" :ref="obj.itemInfo.item_id" :item="obj.itemInfo" v-model="obj.count" /></el-col>
+			</div>
+		</transition-group>
 		<transition name="el-fade-in-linear" :appear="true">
 			<el-card shadow="never">
 				<el-row type="flex" justify="end" align="middle">
-					<span>总价：<span class="price">￥{{totalPrice}}</span></span>
-					<el-button @click="makeOrder" :disabled="selectedList.length == 0" class="btn-pay" type="success" round>结算({{selectedList.length}})</el-button>
+					<span>
+						总价：
+						<span class="price">￥{{ totalPrice }}</span>
+					</span>
+					<el-button @click="makeOrder" :disabled="selectedList.length == 0" class="btn-pay" type="success" round>结算({{ selectedList.length }})</el-button>
 				</el-row>
 			</el-card>
 		</transition>
@@ -40,23 +39,25 @@ export default {
 	},
 	computed: {
 		// 总价格
-		totalPrice () {
+		totalPrice() {
 			let vm = this;
 			if (vm.selectedList.length == 0) {
-				return 0
+				return 0;
 			}
-			return vm.selectedList.reduce((result, value) => {
-				console.log(vm.$refs[value][0].totalPrice)
-				result += Number(vm.$refs[value][0].totalPrice)
-				return result
-			}, 0).toFixed(2)
+			return vm.selectedList
+				.reduce((result, value) => {
+					console.log(vm.$refs[value][0].totalPrice);
+					result += Number(vm.$refs[value][0].totalPrice);
+					return result;
+				}, 0)
+				.toFixed(2);
 		},
 		// 被选中的物品和数量
 		makeOrderData() {
 			var arr = this.itemList.filter((obj, index, self) => {
-				return this.selectedList.includes(obj.itemInfo.item_id)
-			})
-			return arr
+				return this.selectedList.includes(obj.itemInfo.item_id);
+			});
+			return arr;
 		}
 	},
 	methods: {
@@ -90,22 +91,22 @@ export default {
 				});
 		},
 		// 删除物品
-		deleteItem: function (item_id) {
+		deleteItem: function(item_id) {
 			this.itemList = this.itemList.filter(item => {
-				return item.itemInfo.item_id != item_id
-			})
+				return item.itemInfo.item_id != item_id;
+			});
 			this.selectedList = this.selectedList.filter(item => {
-				return item != item_id
-			})
+				return item != item_id;
+			});
 		},
 		// 结算选中物品
-		makeOrder: function () {
+		makeOrder: function() {
 			this.$router.push({
-				name: 'orderCreate', 
+				name: 'orderCreate',
 				params: {
 					item_list: this.makeOrderData
-				},
-			})
+				}
+			});
 		}
 	},
 	mounted() {
@@ -117,8 +118,8 @@ export default {
 <style lang="stylus" scoped>
 .my-checkbox
 	margin-top 6.25rem
-	height: 1.25rem
-	width: 1.25rem
+	height 1.25rem
+	width 1.25rem
 .btn-pay
 	float right
 	margin 1.625rem 1.25rem

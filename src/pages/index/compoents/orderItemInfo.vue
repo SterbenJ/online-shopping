@@ -32,11 +32,6 @@ export default {
 		
 	},
 	methods: {
-		// 打开商品详情页面(复写)
-		openProductDetails: function() {
-			// window.open(pageRoutes.commodity.concat('/' + this.cItem.item_id), '_blank')
-			this.$router.replace({ name: 'commodity', params: { item_id: this.cItem.item_id } })
-		}
 	},
 };
 </script>

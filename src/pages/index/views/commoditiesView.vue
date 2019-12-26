@@ -1,10 +1,10 @@
 <template>
 	<el-row v-loading="loading" style="padding: 5px;">
-		<el-col v-for="(obj, index) in itemList" :key="obj.item_id" :span="12" :xs="12" :md="8" :lg="4">
-			<transition name="el-fade-in-linear" :appear="true">
+		<transition-group name="el-fade-in-linear" :appear="true">
+			<el-col v-for="(obj, index) in itemList" :key="obj.item_id" :span="12" :xs="12" :md="8" :lg="4">	
 				<commodity-card :item="obj"/>
-			</transition>
-		</el-col>
+			</el-col>
+		</transition-group>
 	</el-row>
 </template>
 

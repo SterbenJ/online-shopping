@@ -1,7 +1,8 @@
 const base = '/order'
 
 export default {
-	create: '/create',
-	cancel: '/cancel',
-	info: '/info'
+	create: base + '/create',
+	cancel: base + '/cancel',
+	info: base + '/info',
+	pay: base + '/pay'
 }
