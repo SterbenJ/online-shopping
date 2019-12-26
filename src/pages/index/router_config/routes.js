@@ -68,5 +68,42 @@ export default [{
 				}
 			}
 		]
+	},
+	// 订单信息(查看信息/付款/取消订单)
+	{
+		name: 'orderInfo',
+		path:'/index.html/order/info/:order_id',
+		components: {
+			content: () => import('../views/orderInfoView.vue')
+		},
+		props: {
+			content: true
+		},
+		beforeEnter: (to, from, next)=> {
+			if (to.params.item_list) {
+				next()
+			} else {
+				next({ name: 'index'})
+			}
+		},
+	},
+	// 创建订单
+	{
+		name: 'orderCreate',
+		path:'/index.html/order/create',
+		components: {
+			content: () => import('../views/orderCreateView.vue')
+		},
+		props: {
+			content: true
+		},
+		beforeEnter: (to, from, next)=> {
+			console.log(to)
+			if (to.params.item_list) {
+				next()
+			} else {
+				next({ name: 'index'})
+			}
+		},
 	}
 ]

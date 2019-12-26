@@ -9,7 +9,7 @@
 				<span class="small-text price">{{ priceStringArr[1] }}</span>
 			</div>
 			<div class="text-block">
-				<span class="large-text name">{{ cItem.name }}</span>
+				<p class="large-text name">{{ cItem.name }}</p>
 			</div>
 			<div class="text-block">
 				<span v-for="(item, index) in tagString" :key="index" class="msg-text small-text">
@@ -61,6 +61,13 @@ export default {
 	margin 0px
 	display table
 	content ''
+.name
+	word-break break-all
+	overflow hidden
+	text-overflow ellipsis
+	display -webkit-box
+	-webkit-line-clamp 2
+	-webkit-box-orient vertical
 .p-oneline
 	display inline-block
 	width 50%

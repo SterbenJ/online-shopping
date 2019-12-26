@@ -1,9 +1,11 @@
 <template>
-	<el-carousel v-loading="loading" class="my-banner" indicator-position="inside">
-		<el-carousel-item v-for="(obj, index) in indexBannerList" :key="obj.item_id">
-			<banner-content :item="obj"/>
-		</el-carousel-item>
-	</el-carousel>
+	<el-card :body-style="{padding: '0px'}" class="my-banner">
+		<el-carousel v-loading="loading" indicator-position="inside">
+			<el-carousel-item v-for="(obj, index) in indexBannerList" :key="obj.item_id">
+				<banner-content :item="obj"/>
+			</el-carousel-item>
+		</el-carousel>
+	</el-card>
 </template>
 
 <script>

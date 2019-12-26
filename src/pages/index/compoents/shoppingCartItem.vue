@@ -1,7 +1,7 @@
 <template>
 	<el-card class="main-contain" :body-style="{padding: '0px'}">
 		<el-row type="flex" justify="space-between" align="middle">
-			<img class="my-image" :src="cItem.image_path"/>
+			<img @click="openProductDetails" class="my-image" :src="cItem.image_path"/>
 			<el-col :span="4">
 				<span class="my-info info-name">{{ cItem.name }}</span>
 			</el-col>
@@ -98,7 +98,12 @@ export default {
 	.info-price
 		color orangered
 	.info-name
-		word-break break-word
+		word-break break-all
+		overflow hidden
+		text-overflow ellipsis
+		display -webkit-box
+		-webkit-line-clamp 3
+		-webkit-box-orient vertical
 		font-weight 900
 	.info-title
 		color darkgray

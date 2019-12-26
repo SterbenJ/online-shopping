@@ -21,25 +21,6 @@ export default {
 	},
 	// 购物车数量
 	userShoppingCartCount (state) {
-		if (state.shoppingCart) {
-			return state.shoppingCart.length
-		}
 		return state.user ? state.user.shopping_cart_count : false
-	},
-	// 购物车列表
-	shoppingCartList (state) {
-		return state.shoppingCart ? state.shoppingCart : []
-	},
-	// 已经勾选的商品列表
-	selectedShoppingCartList (state) {
-		if (state.selectedShoppingCart) {
-			return state.selectedShoppingCart.filter(item => {
-				return shoppingCartList.findIndex(iitem => {
-					item.item_id == iitem.itemid
-				}) != -1
-			})
-		} else {
-			return []
-		}
 	}
 }

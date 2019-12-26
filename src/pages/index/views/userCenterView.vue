@@ -3,7 +3,7 @@
 		<el-col :span="22" :offset="1" :lg="{ span: 16, offset: 4 }">
 			<el-row :gutter="20">
 				<el-col class="aside-contain" :span="6" :lg="4">
-					<el-menu :router="true" ref="asideMenu" default-active="userShoppingCart" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+					<el-menu mode="vertical" :router="true" ref="asideMenu" default-active="userShoppingCart" class="el-menu-vertical-demo">
 						
 						<el-menu-item :route="{name: 'shoppingCart'}" index="userShoppingCart">
 							<i class="el-icon-shopping-cart-2"></i>
@@ -114,8 +114,6 @@ export default {
 	methods: {},
 	computed: {},
 	mounted() {
-		this.$refs['asideMenu'].open('userOrder')
-		this.$refs['asideMenu'].open('userInfo')
 	}
 };
 </script>

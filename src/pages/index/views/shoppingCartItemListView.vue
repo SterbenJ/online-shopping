@@ -14,7 +14,7 @@
 			<el-card shadow="never">
 				<el-row type="flex" justify="end" align="middle">
 					<span>总价：<span class="price">￥{{totalPrice}}</span></span>
-					<el-button :disabled="selectedList.length == 0" class="btn-pay" type="success" round>结算({{selectedList.length}})</el-button>
+					<el-button @click="makeOrder" :disabled="selectedList.length == 0" class="btn-pay" type="success" round>结算({{selectedList.length}})</el-button>
 				</el-row>
 			</el-card>
 		</transition>
@@ -23,7 +23,6 @@
 
 <script>
 import shoppingCartItem from '../compoents/shoppingCartItem.vue';
-import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 import shoppingCartApi from '../../../api/shoppingCartApi.js';
 
@@ -40,10 +39,6 @@ export default {
 		shoppingCartItem
 	},
 	computed: {
-		...mapGetters({
-			shoppingCartList: 'shoppingCartList',
-			selectedShoppingCartList: 'selectedShoppingCartList'
-		}),
 		// 总价格
 		totalPrice () {
 			let vm = this;
@@ -55,17 +50,16 @@ export default {
 				result += Number(vm.$refs[value][0].totalPrice)
 				return result
 			}, 0).toFixed(2)
+		},
+		// 被选中的物品和数量
+		makeOrderData() {
+			var arr = this.itemList.filter((obj, index, self) => {
+				return this.selectedList.includes(obj.itemInfo.item_id)
+			})
+			return arr
 		}
 	},
 	methods: {
-		...mapActions({
-			updateShoppingCartAsync: 'updateShoppingCartAsync',
-			updateSelectedShoppingCartAsync: 'updateSelectedShoppingCartAsync'
-		}),
-		...mapMutations({
-			updateShoppingCart: 'updateShoppingCart',
-			updateSelectedShoppingCart: 'updateSelectedShoppingCart'
-		}),
 		// 获得购物车列表
 		getItemList: function() {
 			let vm = this;
@@ -97,11 +91,21 @@ export default {
 		},
 		// 删除物品
 		deleteItem: function (item_id) {
-			console.log(item_id)
 			this.itemList = this.itemList.filter(item => {
 				return item.itemInfo.item_id != item_id
 			})
-			this.totalPrice()
+			this.selectedList = this.selectedList.filter(item => {
+				return item != item_id
+			})
+		},
+		// 结算选中物品
+		makeOrder: function () {
+			this.$router.push({
+				name: 'orderCreate', 
+				params: {
+					item_list: this.makeOrderData
+				},
+			})
 		}
 	},
 	mounted() {

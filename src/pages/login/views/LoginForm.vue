@@ -58,7 +58,7 @@ export default {
 		// 校验账号
 		let CheckAccount = (rule, value, callback) => {
 			if (!value) {
-				return callback(new Error('账号不能为空'));
+				callback(new Error('账号不能为空'));
 			}
 			if (value.length < config.accountMinlength) {
 				callback(new Error('必须大于 6 位'));
