@@ -106,7 +106,7 @@ export default {
 			arr.forEach((value, index, arr) => {
 				arr[index] = {
 					count: value.count,
-					itemId: value.itemInfo.item_id
+					item_id: value.itemInfo.item_id
 				}
 			})
 			return arr

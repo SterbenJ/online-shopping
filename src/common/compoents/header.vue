@@ -5,10 +5,8 @@
 				<!-- logo -->
 				<el-menu-item index="index" :route="{ name: 'index'}" class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{ name: 'index' }">Online Shopping</router-link></el-menu-item>
 				<!-- 搜索 -->
-				<el-col :span="10" :lg="7">
-					<el-menu-item index="search" class="my-menu-item" style="border-bottom-color: transparent; text-align: center;">
-						<el-input v-model="searchInput"><el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button></el-input>
-					</el-menu-item>
+				<el-col style="margin: 10px;" :span="10" :lg="7">
+					<el-input v-model="searchInput"><el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button></el-input>
 				</el-col>
 				<!-- 登入/用户中心按钮 -->
 				<el-popover :open-delay="cuserPopper.openDelay" :close-delay="cuserPopper.closeDelay" ref="user-popover" trigger="hover" placement="bottom">
@@ -83,6 +81,17 @@ export default {
 		handleSelect(key, keyPath) {
 			
 		},
+		// 搜索
+		toSearch() {
+			if (this.searchInput.length > 0) {
+				this.$router.push({
+					name: 'search',
+					params: {
+						searchStr: this.searchInput
+					}
+				})
+			}
+		}
 	}
 };
 </script>

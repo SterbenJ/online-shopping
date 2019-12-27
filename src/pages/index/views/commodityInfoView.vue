@@ -85,13 +85,13 @@ export default {
 			vm.$axios({
 				method: 'GET',
 				url: commodityApi.itemInfo,
-				data: {
-					itemID: vm.item_id
+				params: {
+					item_id: vm.item_id
 				}
 			})
 				.then(r => {
 					if (r.data.code == 200) {
-						vm.itemInfo = { ...r.data.data.itemInfo };
+						vm.itemInfo = { ...r.data.data };
 					} else {
 						vm.$notify({
 							title: '加载失败',

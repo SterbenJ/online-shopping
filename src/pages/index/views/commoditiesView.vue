@@ -34,11 +34,12 @@ export default {
 				url: commodityApi.indexItemList
 			})
 			.then(r => {
-				vm.itemList = r.data.data.indexItemList
 				vm.loading = false
+				if (r.data.code == 200) {
+					vm.itemList = r.data.data
+				}
 			})
 			.catch(r => {
-				console.log('list fail')
 				vm.loading = false
 			})
 		}

@@ -69,7 +69,7 @@ export default {
 				method: 'POST',
 				url: shoppingCartApi.addItem,
 				data: {
-					itemID: vm.citemInfo.item_id,
+					item_id: vm.citemInfo.item_id,
 					count: vm.count
 				}
 			})

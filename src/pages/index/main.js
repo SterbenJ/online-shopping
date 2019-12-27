@@ -22,8 +22,7 @@ Vue.use(ElementUI)
 
 const store = createStore()
 const router = createRouter()
-
-
+axios.defaults.withCredentials = true
 // 根据环境设定 baseUrl
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? (baseApi.backgroundHost + baseApi.apiPrefix) : baseApi
 	.apiPrefix,

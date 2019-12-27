@@ -19,6 +19,17 @@ export default [{
 			content: true
 		}
 	},
+	// 搜索页面
+	{
+		name: 'search',
+		path: '/index.html/search/:searchStr',
+		components: {
+			content: () => import('../views/searchView.vue')
+		},
+		props: {
+			content: true
+		}
+	},
 	// 商品详情
 	{
 		name: 'commodity',

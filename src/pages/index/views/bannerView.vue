@@ -32,7 +32,7 @@ export default {
 				url: commodityApi.indexBannerList
 			})
 			.then(r => {
-				vm.indexBannerList = r.data.data.indexBannerList
+				vm.indexBannerList = r.data.data
 				vm.loading = false
 			})
 			.catch(r => {

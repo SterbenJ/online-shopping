@@ -70,7 +70,7 @@ export default {
 			})
 				.then(r => {
 					if (r.data.code == 200) {
-						vm.itemList = r.data.data.itemList;
+						vm.itemList = r.data.data
 					} else {
 						vm.$notify({
 							title: '获取购物车列表失败',

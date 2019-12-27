@@ -94,9 +94,11 @@ export default {
 					}
 				],
 				email: [
+					{ required: true, message: '请输入邮箱', trigger: 'change' },
 					{ validator: checkEmail, trigger: 'change' }
 				],
 				phone_number: [
+					{ required: true, message: '请输入手机号码', trigger: 'change' },
 					{ validator: checkPhoneNumber, trigger: 'change' }
 				]
 			}

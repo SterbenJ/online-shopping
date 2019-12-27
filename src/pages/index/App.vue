@@ -49,7 +49,7 @@ export default {
 				url: userApi.hasLogin
 			})
 				.then(r => {
-					if (r.data.code == 200 && r.data.data.hasLogin) {
+					if (r.data.code == 200 && r.data.data.login) {
 						console.log("getUserInfo")
 						vm.getUserInfo()
 					}
