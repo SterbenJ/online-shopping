@@ -3,10 +3,12 @@
 </template>
 
 <script>
+import pageRoutes from '../../../../api/pageRoutes.js'
+
 export default {
 	data () {
 		return {
-			url: 'https://www.baidu.com'
+			url: pageRoutes.register
 		}
 	}
 };

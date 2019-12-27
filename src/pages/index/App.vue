@@ -72,7 +72,7 @@ export default {
 			})
 				.then(r => {
 					if (r.data.code == 200) {
-						vm.updateUser(r.data.data.user);
+						vm.updateUser(r.data.data);
 					} else {
 						vm.$notify({
 							title: '获取用户信息失败',

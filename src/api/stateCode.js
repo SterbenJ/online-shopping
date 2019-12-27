@@ -20,11 +20,4 @@ export default {
 	
 	// 权限错误
 	notAuthority: 401,
-	
-	// 收藏成功
-	collectSuccess: 50005,
-	
-	// 取消收藏成功
-	uncollectSuccess: 50006,
-
 }

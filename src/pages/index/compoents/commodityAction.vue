@@ -14,7 +14,6 @@
 import collectionApi from '../../../api/collectionApi.js';
 import shoppingCartApi from '../../../api/shoppingCartApi.js';
 import { mapMutations, mapActions } from 'vuex';
-import stateCode from '../../../api/stateCode.js';
 
 const defaultInfo = {
 	itemInfo: {
@@ -100,14 +99,14 @@ export default {
 				url: collectionApi.addItem
 			})
 				.then(r => {
-					if (r.data.code == stateCode.collectSuccess) {
+					if (r.data.data.added) {
 						vm.$notify({
 							title: '成功添加至收藏夹',
 							type: 'success',
 							offset: 80
 						});
 						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
-					} else if (r.data.code == stateCode.uncollectSuccess) {
+					} else if (!r.data.data.added) {
 						vm.$notify({
 							title: '成功取消收藏',
 							type: 'success',
@@ -117,7 +116,7 @@ export default {
 					} else {
 						vm.$notify({
 							title: '操作失败',
-							message: r.data ? r.data.message : '',
+							message: r.data.message ? r.data.message : '',
 							type: 'error',
 							offset: 80
 						});
@@ -127,7 +126,7 @@ export default {
 				.catch(r => {
 					vm.$notify({
 						title: '操作失败',
-						message: r.data ? r.data.message : '',
+						message: r.data.message ? r.data.message : '',
 						type: 'error',
 						offset: 80
 					});

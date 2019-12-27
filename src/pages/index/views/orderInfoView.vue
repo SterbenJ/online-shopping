@@ -4,22 +4,26 @@
 			<el-row>
 				<el-col :span="22" :offset="1">
 					<p class="info-title">
+						状态：
+						<span class="info-content order-state">{{ orderState }}</span>
+					</p>
+					<p class="info-title">
 						收件人：
-						<span class="info-content">{{ data.acceptUserName }}</span>
+						<span class="info-content order-accept-name">{{ data.acceptUserName }}</span>
 					</p>
 					<p class="info-title">
 						手机号码：
-						<span class="info-content">{{ data.acceptUserPhoneNumber }}</span>
+						<span class="info-content order-phone-number">{{ data.acceptUserPhoneNumber }}</span>
 					</p>
 					<p class="info-title">
 						收获地址：
-						<span class="info-content">{{ data.acceptUserAddress }}</span>
+						<span class="info-content order-address">{{ data.acceptUserAddress }}</span>
 					</p>
 					<p class="info-title">
 						备注：
-						<p class="info-content">{{ data.mark }}</p>
+						<p class="info-content order-mark">{{ data.mark }}</p>
 					</p>
-					<el-timeline>
+					<el-timeline class="my-timeline">
 						<el-timeline-item v-for="(obj, index) in timelineData" :key="index" :type="obj.active ? 'primary' : ''" :timestamp="obj.time">
 							{{ obj.display }}
 						</el-timeline-item>
@@ -45,7 +49,7 @@
 				<el-row class="form-action" type="flex" justify="end" align="middle">
 					<span v-if="!data.payment_time">
 						总价：
-						<span class="price">￥{{ totlaPrice }}</span>
+						<span class="price">￥{{ data.price }}</span>
 					</span>
 					<el-button @click="pay" v-if="!data.payment_time" :loading="btnPayloading" class="btn-pay" type="primary" round>支付</el-button>
 					<el-button @click="cancel" :loading="btnCancelLoading" class="btn-pay" type="warning" round>取消订单</el-button>
@@ -84,6 +88,7 @@ export default {
 				accept_user_address: '',
 				accept_user_phone_number: '',
 				mark: '',
+				close: false,
 				items: []
 			},
 			btnPayLoading: false,
@@ -92,14 +97,6 @@ export default {
 		};
 	},
 	computed: {
-		// 总价格
-		totlaPrice() {
-			return this.data.items
-				.reduce((result, value, index, arr) => {
-					return result + value.itemInfo.price * value.count;
-				}, 0)
-				.toFixed(2);
-		},
 		// 处理时间线数据
 		timelineData() {
 			let vm = this;
@@ -113,6 +110,11 @@ export default {
 				};
 			}, 0);
 			return keyArr;
+		},
+		// 根据数据决定状态
+		orderState() {
+			let vm = this;
+			return vm.close ? (vm.data.receipt_time ? '已完成' : '已取消') : '进行中'
 		}
 	},
 	methods: {
@@ -148,8 +150,12 @@ export default {
 			this.$notify({
 				title: '请求信息失败',
 				message: message ? message : '',
-				type: 'error'
+				type: 'error',
+				offset: 80
 			});
+			setTimeout(() => {
+				// Todo: 跳转回订单列表
+			}, 200)
 		},
 		// 支付
 		pay() {
@@ -179,16 +185,20 @@ export default {
 		paySuccess() {
 			this.$notify({
 				title: '支付成功',
-				type: 'success'
+				type: 'success',
+				offset: 80
 			});
-			window.open(window.localtion.href, '_self');
+			setTimeout(() => {
+				window.open(window.location.href, '_self');
+			}, 200)
 		},
 		// 支付失败
 		payFail(message) {
 			this.$notify({
 				title: '支付失败',
 				message: message ? message : '',
-				type: 'error'
+				type: 'error',
+				offset: 80
 			});
 		},
 		// 取消订单
@@ -219,17 +229,24 @@ export default {
 		cancelSuccess() {
 			this.$notify({
 				title: '取消订单成功',
-				type: 'success'
+				type: 'success',
+				offset: 80
 			});
-			window.open(pageRoutes.index, '_self');
+			setTimeout(() => {
+				window.open(pageRoutes.index, '_self');
+			}, 200)
 		},
 		// 取消订单失败
 		cancelFail(message) {
 			this.$notify({
 				title: '取消订单失败',
 				message: message ? message : '',
-				type: 'error'
+				type: 'error',
+				offset: 80
 			});
+			setTimeout(() => {
+				window.open(window.location.href, '_self');
+			}, 200)
 		},
 	},
 	mounted() {
@@ -239,6 +256,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@font-face
+	font-family bfabc
+	src '../../../../public/bfabc.woff2'
 .form-action
 	padding-top 1.25rem
 .btn-pay
@@ -248,10 +268,20 @@ export default {
 .price
 	color orangered
 	font-size 1.25rem
+.my-timeline
+	padding-top 1.25rem
 .info-title
 	font-size 1rem
 	color darkgray
-.info-content
-	color dimgray
-	font-size 1.15rem
+	.info-content
+		color dimgray
+		font-size 1.5rem
+	.order-state
+		font-weight 700
+		color palevioletred
+	.order-accept-name
+		color #409EFF
+	.order-phone-number
+		font-family bfabc
+	
 </style>

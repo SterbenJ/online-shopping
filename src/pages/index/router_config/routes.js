@@ -66,6 +66,38 @@ export default [{
 				props: {
 					main: true
 				}
+			},
+			// 收藏列表
+			{
+				name: 'collectionList',
+				path: '/index.html/userCenter/:user_id/collectionList',
+				components: {
+					main: () => import('../views/collectionListView.vue')
+				}
+			},
+			// 查看个人信息
+			{
+				name: 'userInfo',
+				path: '/index.html/userCenter/:user_id/info',
+				components: {
+					main: () => import('../views/userInfoView.vue')
+				}
+			},
+			// 修改个人信息
+			{
+				name: 'userChangeInfo',
+				path: '/index.html/userCenter/:user_id/editInfo',
+				components: {
+					main: () => import('../views/userEditInfoView.vue')
+				}
+			},
+			// 修改密码
+			{
+				name: 'userChangePwd',
+				path: '/index.html/userCenter/:user_id/changePwd',
+				components: {
+					main: () => import('../views/userChangePwdView.vue')
+				}
 			}
 		]
 	},

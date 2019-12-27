@@ -7,16 +7,16 @@
 					<el-col :lg="{ span: 18, offset: 3}" :span="22" :offset="1">
 						<el-form label-width="auto" label-position="left" ref="form" :model="formData" :rules="rules">
 							<el-form-item label="收货人" prop="acceptUserName">
-								<el-input v-model="formData.acceptUserName" suffix-icon="el-icon-user-solid" clearable></el-input>
+								<el-input show-word-limit maxlength="12" placeholder="1 - 12 位" v-model="formData.acceptUserName" suffix-icon="el-icon-user-solid" clearable></el-input>
 							</el-form-item>
 							<el-form-item label="收获地址" prop="acceptUserAddress">
-								<el-input v-model="formData.acceptUserAddress" suffix-icon="el-icon-location" clearable></el-input>
+								<el-input show-word-limit maxlength="64" placeholder="1 - 64 个字符" v-model="formData.acceptUserAddress" suffix-icon="el-icon-location" clearable></el-input>
 							</el-form-item>
 							<el-form-item label="手机号码" prop="acceptUserPhoneNumber">
-								<el-input v-model="formData.acceptUserPhoneNumber" suffix-icon="el-icon-phone" clearable></el-input>
+								<el-input show-word-limit maxlength="11" v-model="formData.acceptUserPhoneNumber" suffix-icon="el-icon-phone" clearable></el-input>
 							</el-form-item>
 							<el-form-item label="订单备注" prop="mark">
-								<el-input v-model="formData.mark" suffix-icon="el-icon-s-comment" clearable></el-input>
+								<el-input show-word-limit maxlength="64" placeholder="1 - 64 个字符" v-model="formData.mark" suffix-icon="el-icon-s-comment" clearable></el-input>
 							</el-form-item>
 						</el-form>
 					</el-col>
@@ -94,7 +94,7 @@ export default {
 					{ validator: checkPhoneNumber, trigger: 'blur' }
 				],
 				mark: [
-					{ min: 1, max: 64, message: '长度在 1 到 12 个字符', trigger: 'blur'}
+					{ min: 1, max: 64, message: '长度在 1 到 64 个字符', trigger: 'blur'}
 				],
 			}
 		}
@@ -135,7 +135,7 @@ export default {
 				.then(r => {
 					vm.loading = false;
 					if (r.data.code == 200) {
-						vm.success();
+						vm.success(r.data.data.order_id);
 					} else {
 						vm.fail(r.data.message);
 					}
@@ -160,12 +160,17 @@ export default {
 			return result;
 		},
 		// 创建成功
-		success() {
+		success(id) {
 			this.$notify({
 				title: '创建成功',
 				type: 'success'
 			})
-			// Todo: 跳转订单信息
+			this.$router.replace({
+				name: 'orderInfo', 
+				params: {
+					order_id: id
+				},
+			})
 		},
 		// 创建失败
 		fail(message) {

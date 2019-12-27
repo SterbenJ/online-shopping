@@ -3,7 +3,7 @@
 		<transition-group name="el-fade-in-linear" :appear="true">
 			<div v-for="(obj, index) in itemList" :key="obj.itemInfo.item_id">
 				<el-col :span="1"><input class="my-checkbox" :value="obj.itemInfo.item_id" v-model="selectedList" type="checkbox" /></el-col>
-				<el-col :span="23"><shopping-cart-item @removeItem="deleteItem" class="test" :ref="obj.itemInfo.item_id" :item="obj.itemInfo" v-model="obj.count" /></el-col>
+				<el-col :span="23"><shopping-cart-item @removeItem="deleteItem" :ref="obj.itemInfo.item_id" :item="obj.itemInfo" v-model="obj.count" /></el-col>
 			</div>
 		</transition-group>
 		<transition name="el-fade-in-linear" :appear="true">

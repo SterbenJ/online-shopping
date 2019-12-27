@@ -131,7 +131,7 @@ export default {
 		},
 		// 从哪跳转来，默认首页
 		fromWhere() {
-			return this.$route.query ? this.$route.query.fromWhere : pageRoutes.index
+			return this.$route.query.fromWhere ? this.$route.query.fromWhere : pageRoutes.index
 		}
 		//
 	},

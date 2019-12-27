@@ -20,23 +20,25 @@
 									:route="{
 										name: 'orderList', 
 										params: {
-											finished: false
+											finished: '0'
 										}
 									}" 
-									index="userOrderActive">进行中
+									index="userOrderActive">
+									进行中
 								</el-menu-item>
 								<el-menu-item :route="{
 										name: 'orderList', 
 										params: {
-											finished: true
+											finished: '1'
 										}
 									}"
-									index="userOrderFinish">已完成
+									index="userOrderFinish">
+									已完成
 								</el-menu-item>
 							</el-menu-item-group>
 						</el-submenu>
 						
-						<el-menu-item :route="{
+					<!-- 	<el-menu-item :route="{
 										name: 'userFollowList', 
 										params: {
 											finished: true
@@ -45,13 +47,10 @@
 									index="userFollow">
 							<i class="el-icon-s-shop"></i>
 							<span slot="title">关注店铺</span>
-						</el-menu-item>
+						</el-menu-item> -->
 						
 						<el-menu-item :route="{
-										name: 'userCollectionList', 
-										params: {
-											finished: true
-										}
+										name: 'collectionList',
 									}"
 									index="userCollection">
 							<i class="el-icon-star-on"></i>
@@ -65,28 +64,19 @@
 							</template>
 							<el-menu-item-group>
 								<el-menu-item :route="{
-										name: 'userInfo', 
-										params: {
-											finished: true
-										}
+										name: 'userInfo',
 									}"
 									index="userCheckInfo">
 									我的个人信息
 								</el-menu-item>
 								<el-menu-item :route="{
-										name: 'userChangePwd', 
-										params: {
-											finished: true
-										}
+										name: 'userChangePwd'
 									}"
 									index="userChangePwd">
 									修改密码
 								</el-menu-item>
 								<el-menu-item :route="{
-										name: 'userChangeInfo', 
-										params: {
-											finished: true
-										}
+										name: 'userChangeInfo'
 									}"
 									index="userChangeInfo">
 									修改个人信息

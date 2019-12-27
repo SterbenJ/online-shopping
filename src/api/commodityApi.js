@@ -1,7 +1,7 @@
 const base = "/item"
 
 export default {
-	indexItemList: base + '/indexList',
-	indexBannerList: base + '/indexBannerList',
+	indexItemList: base + '/list',
+	indexBannerList: base + '/bannerList',
 	itemInfo: base + '/info'
 }
