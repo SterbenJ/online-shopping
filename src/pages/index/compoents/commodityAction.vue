@@ -96,7 +96,10 @@ export default {
 			let vm = this;
 			vm.$axios({
 				method: 'POST',
-				url: collectionApi.addItem
+				url: collectionApi.addItem,
+				data: {
+					item_id: vm.citemInfo.item_id
+				}
 			})
 				.then(r => {
 					if (r.data.data.added) {
@@ -105,14 +108,14 @@ export default {
 							type: 'success',
 							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
 					} else if (!r.data.data.added) {
 						vm.$notify({
 							title: '成功取消收藏',
 							type: 'success',
 							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
 					} else {
 						vm.$notify({
 							title: '操作失败',
@@ -120,7 +123,7 @@ export default {
 							type: 'error',
 							offset: 80
 						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.result }));
+						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
 					}
 				})
 				.catch(r => {

@@ -20,7 +20,7 @@ export default () => {
 					url: userApi.hasLogin
 				})
 				.then(r => {
-					if (!r.data.data.hasLogin) {
+					if (!r.data.data.login) {
 						window.open(pageRoutes.login + '?fromWhere=' + window.location.href, '_self')
 					} else {
 						next()
