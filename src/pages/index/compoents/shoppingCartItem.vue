@@ -53,6 +53,37 @@ export default {
 		// 双向绑定 count
 		changeCount: function () {
 			this.$emit('changeCount', this.count)
+			this.updateCount()
+			console.log('changeCount')
+		},
+		// 更新商品数量
+		updateCount: function () {
+			let vm = this;
+			vm.$axios({
+				method: 'POST',
+				url: shoppingCartApi.updateCount,
+				data: {
+					item_id: vm.cItem.item_id,
+					count: vm.count
+				}
+			})
+				.then(r => {
+					if (r.data.code == 200) {
+						vm.count = r.data.data.count
+					} else {
+						vm.$notify({
+							title: '更改数量失败',
+							message: r.data.message ? r.data.message : '',
+							type: 'error'
+						})
+					}
+				})
+				.catch(e => {
+					vm.$notify({
+						title: '更改数量失败',
+						type: 'error'
+					})
+				})
 		},
 		// 删除购物车物品
 		deleteItem: function () {
