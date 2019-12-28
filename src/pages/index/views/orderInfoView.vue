@@ -36,8 +36,8 @@
 			<el-row class="form-items">
 				<el-col :span="22" :offset="1">
 					<el-row>
-						<el-col v-for="(obj, index) in data.items" :key="obj.itemInfo.item_id" :span="6">
-							<order-item-info :item="obj.itemInfo" :count="obj.count"></order-item-info>
+						<el-col v-for="(obj, index) in data.items" :key="obj.item.item_id" :span="6">
+							<order-item-info :item="obj.item" :count="obj.count"></order-item-info>
 						</el-col>
 					</el-row>
 				</el-col>
