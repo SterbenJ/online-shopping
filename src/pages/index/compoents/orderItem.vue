@@ -29,7 +29,7 @@ export default {
 		itemsName() {
 			var arr = []
 			this.order.items.slice(0, 3).forEach(item => {
-				arr.push(item.itemInfo.name)
+				arr.push(item.item.name)
 			})
 			console.log(arr)
 			return arr.join(' ')

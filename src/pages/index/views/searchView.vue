@@ -63,7 +63,9 @@ export default {
 				vm.loading = false
 				if (r.data.code == 200) {
 					vm.itemList.push(...r.data.data)
-					vm.page++
+					if (r.data.data.lengh < 18) {
+						vm.page++
+					}
 				}
 			})
 			.catch(r => {

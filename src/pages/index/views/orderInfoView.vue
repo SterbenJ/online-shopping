@@ -47,12 +47,12 @@
 
 			<transition name="el-fade-in-linear" :appear="true">
 				<el-row class="form-action" type="flex" justify="end" align="middle">
-					<span v-if="!data.payment_time">
+					<span>
 						总价：
 						<span class="price">￥{{ data.price }}</span>
 					</span>
 					<el-button @click="pay" v-if="!data.payment_time" :loading="btnPayloading" class="btn-pay" type="primary" round>支付</el-button>
-					<el-button @click="cancel" :loading="btnCancelLoading" class="btn-pay" type="warning" round>取消订单</el-button>
+					<el-button v-if="!data.receipt_time" @click="cancel" :loading="btnCancelLoading" class="btn-pay" type="warning" round>取消订单</el-button>
 				</el-row>
 			</transition>
 		</el-col>
