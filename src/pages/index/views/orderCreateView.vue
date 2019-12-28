@@ -106,7 +106,7 @@ export default {
 			arr.forEach((value, index, arr) => {
 				arr[index] = {
 					count: value.count,
-					item_id: value.itemInfo.item_id
+					item_id: value.item.item_id
 				}
 			})
 			return arr
@@ -114,7 +114,7 @@ export default {
 		// 总价格
 		totlaPrice() {
 			return this.item_list.reduce((result, value, index, arr) => {
-				return result + value.itemInfo.price * value.count
+				return result + value.item.price * value.count
 			}, 0).toFixed(2)
 		}
 	},
