@@ -6,7 +6,7 @@
 				<span class="my-info info-name">{{ cItem.name }}</span>
 			</el-col>
 			<p class="info-title">单价<span class="my-info info-price">￥{{ cItem.price }}</span></p>
-			<el-input-number @blur="changeCount" class="my-info info-count" v-model="count" :min="1" :max="99" label="数量"/>
+			<el-input-number @change="changeCount" @blur="updateCount" class="my-info info-count" v-model="count" :min="1" :max="99" label="数量"/>
 			<p class="info-title">小计<span class="my-info info-price">￥{{ totalPrice }}</span></p>
 			<el-row class="action-contain">
 				<el-col>
@@ -53,7 +53,6 @@ export default {
 		// 双向绑定 count
 		changeCount: function () {
 			this.$emit('changeCount', this.count)
-			this.updateCount()
 			console.log('changeCount')
 		},
 		// 更新商品数量
