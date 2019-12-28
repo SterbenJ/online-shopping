@@ -130,7 +130,8 @@ export default {
 			vm.loading = true;
 			vm.$axios({
 				method: 'POST',
-				url: orderApi.create
+				url: orderApi.create,
+				data: vm.formData
 			})
 				.then(r => {
 					vm.loading = false;
