@@ -78,7 +78,7 @@ export default {
 				acceptUserAddress: '',
 				acceptUserPhoneNumber: '',
 				mark: '',
-				items: this.makeOrderItemList
+				items: []
 			},
 			rules: {
 				acceptUserName: [
@@ -128,6 +128,7 @@ export default {
 				return
 			}
 			vm.loading = true;
+			vm.formData.items.push(...vm.makeOrderItemList)
 			vm.$axios({
 				method: 'POST',
 				url: orderApi.create,
