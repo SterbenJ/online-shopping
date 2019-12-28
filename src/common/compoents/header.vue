@@ -5,7 +5,7 @@
 				<!-- logo -->
 				<el-menu-item index="index" :route="{ name: 'index'}" class="my-menu-item" id="logo"><router-link class="a-no-line" :to="{ name: 'index' }">Online Shopping</router-link></el-menu-item>
 				<!-- 搜索 -->
-				<el-col style="margin: 10px;" :span="10" :lg="7">
+				<el-col style="margin: 8px;" :span="10" :lg="7">
 					<el-input v-model="searchInput"><el-button @click="toSearch" slot="append" icon="el-icon-search">搜索</el-button></el-input>
 				</el-col>
 				<!-- 登入/用户中心按钮 -->
