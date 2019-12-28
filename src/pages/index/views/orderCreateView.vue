@@ -6,14 +6,14 @@
 				<el-row class="form-info">
 					<el-col :lg="{ span: 18, offset: 3}" :span="22" :offset="1">
 						<el-form label-width="auto" label-position="left" ref="form" :model="formData" :rules="rules">
-							<el-form-item label="收货人" prop="acceptUserName">
-								<el-input show-word-limit maxlength="12" placeholder="1 - 12 位" v-model="formData.acceptUserName" suffix-icon="el-icon-user-solid" clearable></el-input>
+							<el-form-item label="收货人" prop="accept_user_name">
+								<el-input show-word-limit maxlength="12" placeholder="1 - 12 位" v-model="formData.accept_user_name" suffix-icon="el-icon-user-solid" clearable></el-input>
 							</el-form-item>
-							<el-form-item label="收获地址" prop="acceptUserAddress">
-								<el-input show-word-limit maxlength="64" placeholder="1 - 64 个字符" v-model="formData.acceptUserAddress" suffix-icon="el-icon-location" clearable></el-input>
+							<el-form-item label="收获地址" prop="accept_user_address">
+								<el-input show-word-limit maxlength="64" placeholder="1 - 64 个字符" v-model="formData.accept_user_address" suffix-icon="el-icon-location" clearable></el-input>
 							</el-form-item>
-							<el-form-item label="手机号码" prop="acceptUserPhoneNumber">
-								<el-input show-word-limit maxlength="11" v-model="formData.acceptUserPhoneNumber" suffix-icon="el-icon-phone" clearable></el-input>
+							<el-form-item label="手机号码" prop="accept_user_phone_number">
+								<el-input show-word-limit maxlength="11" v-model="formData.accept_user_phone_number" suffix-icon="el-icon-phone" clearable></el-input>
 							</el-form-item>
 							<el-form-item label="订单备注" prop="mark">
 								<el-input show-word-limit maxlength="64" placeholder="1 - 64 个字符" v-model="formData.mark" suffix-icon="el-icon-s-comment" clearable></el-input>
@@ -74,22 +74,22 @@ export default {
 		return {
 			loading: false,
 			formData: {
-				acceptUserName: '',
-				acceptUserAddress: '',
-				acceptUserPhoneNumber: '',
+				accept_user_name: '',
+				accept_user_address: '',
+				accept_user_phone_number: '',
 				mark: '',
 				items: []
 			},
 			rules: {
-				acceptUserName: [
+				accept_user_name: [
 					{ required: true, message: '请输入收货人', trigger: 'blur' },
 					{ min: 1, max: 12, message: '长度在 1 到 12 个字符', trigger: 'blur'}
 				],
-				acceptUserAddress: [
+				accept_user_address: [
 					{ required: true, message: '请输入地址', trigger: 'blur' },
 					{ min: 1, max: 64, message: '长度在 1 到 64 个字符', trigger: 'blur'}
 				],
-				acceptUserPhoneNumber: [
+				accept_user_phone_number: [
 					{ required: true, message: '手机号码不能为空', trigger: 'blur' },
 					{ validator: checkPhoneNumber, trigger: 'blur' }
 				],

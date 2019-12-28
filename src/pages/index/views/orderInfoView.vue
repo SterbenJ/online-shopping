@@ -9,15 +9,15 @@
 					</p>
 					<p class="info-title">
 						收件人：
-						<span class="info-content order-accept-name">{{ data.acceptUserName }}</span>
+						<span class="info-content order-accept-name">{{ data.accept_user_name }}</span>
 					</p>
 					<p class="info-title">
 						手机号码：
-						<span class="info-content order-phone-number">{{ data.acceptUserPhoneNumber }}</span>
+						<span class="info-content order-phone-number">{{ data.accept_user_phone_number }}</span>
 					</p>
 					<p class="info-title">
 						收获地址：
-						<span class="info-content order-address">{{ data.acceptUserAddress }}</span>
+						<span class="info-content order-address">{{ data.accept_user_address }}</span>
 					</p>
 					<p class="info-title">
 						备注：
