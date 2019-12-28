@@ -74,14 +74,23 @@ export default {
 				}
 			})
 				.then(r => {
-					vm.updateUserAsync({
-						shopping_cart_count: r.data.data.shopping_cart_count
-					});
-					vm.$notify({
-						title: '添加购物车成功',
-						type: 'success',
-						offset: 80
-					});
+					if (r.data.code == 200) {
+						vm.updateUserAsync({
+							shopping_cart_count: r.data.data.shopping_cart_count
+						});
+						vm.$notify({
+							title: '添加购物车成功',
+							type: 'success',
+							offset: 80
+						});
+					} else {
+						vm.$notify({
+							title: '添加购物车失败',
+							message: r.data.message ? r.data.message : '',
+							type: 'error',
+							offset: 80
+						});
+					}
 				})
 				.catch(r => {
 					vm.$notify({
@@ -102,21 +111,24 @@ export default {
 				}
 			})
 				.then(r => {
-					if (r.data.data.added) {
-						vm.$notify({
-							title: '成功添加至收藏夹',
-							type: 'success',
-							offset: 80
-						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
-					} else if (!r.data.data.added) {
-						vm.$notify({
-							title: '成功取消收藏',
-							type: 'success',
-							offset: 80
-						});
-						vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
-					} else {
+					if (r.data.code == 200) {
+						if (r.data.data.added) {
+							vm.$notify({
+								title: '成功添加至收藏夹',
+								type: 'success',
+								offset: 80
+							});
+							vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
+						} else if (!r.data.data.added) {
+							vm.$notify({
+								title: '成功取消收藏',
+								type: 'success',
+								offset: 80
+							});
+							vm.$emit('changeItemInfo', Object.assign(vm.citemInfo, { collected: r.data.data.added }));
+						}
+					}
+					else {
 						vm.$notify({
 							title: '操作失败',
 							message: r.data.message ? r.data.message : '',
@@ -129,7 +141,6 @@ export default {
 				.catch(r => {
 					vm.$notify({
 						title: '操作失败',
-						message: r.data.message ? r.data.message : '',
 						type: 'error',
 						offset: 80
 					});

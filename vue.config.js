@@ -1,3 +1,6 @@
+import baseApi from './src/api/baseApi.js'
+
+
 const {
 	CleanWebpackPlugin
 } = require("clean-webpack-plugin");
@@ -34,17 +37,17 @@ module.exports = {
 	},
 	devServer: {
 		host: '127.0.0.1',
-		port: 2006
-		// proxy: {
-			// '/api': {
-				// target: 'http://127.0.0.1:8080',
-				// changeOrigin: true,
-				// secure: false,
+		port: 8000,
+		proxy: {
+			'/api': {
+				target: baseApi.backgroundHost,
+				changeOrigin: true,
+				secure: false,
 				// pathRewrite: {
-					// '^/api': ''
+				// 	'^/api': ''
 				// }
-			// }
-		// },
+			}
+		},
 	},
 	configureWebpack: config => {
 		return {

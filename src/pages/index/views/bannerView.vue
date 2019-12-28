@@ -32,8 +32,12 @@ export default {
 				url: commodityApi.indexBannerList
 			})
 			.then(r => {
-				vm.indexBannerList = r.data.data
 				vm.loading = false
+				if (r.data.code == 200) {
+					vm.indexBannerList = r.data.data
+				} else {
+					
+				}
 			})
 			.catch(r => {
 				console.log('list fail')

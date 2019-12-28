@@ -69,10 +69,14 @@ export default {
 					data: vm.cRequest.data
 				})
 				.then(r => {
-					vm.LoginSuccess(r);
+					if (r.data.code == 200) {
+						vm.LoginSuccess(r);
+					} else {
+						vm.LoginFail(r);
+					}
 				})
-				.catch(r => {
-					vm.LoginFail(r);
+				.catch(e => {
+					vm.LoginFail();
 				});
 		},
 		// 登入成功
@@ -81,9 +85,9 @@ export default {
 			vm.$emit('LoginSuccess', r);
 		},
 		// 登入失败
-		LoginFail(r) {
+		LoginFail(e) {
 			let vm = this;
-			vm.$emit('LoginFail', r);
+			vm.$emit('LoginFail', e);
 		}
 	}
 };

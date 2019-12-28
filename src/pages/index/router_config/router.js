@@ -13,7 +13,6 @@ export default () => {
 	// 全局前置守卫
 	router.beforeEach((to, from, next) => {
 		console.log(to.name)
-		console.log(['userCenter', 'shoppingCart'].indexOf(to.name) != -1)
 		if (['userCenter', 'shoppingCart'].indexOf(to.name) != -1) {
 			axios({
 					method: 'GET',

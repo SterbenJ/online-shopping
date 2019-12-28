@@ -24,20 +24,19 @@ const store = createStore()
 const router = createRouter()
 axios.defaults.withCredentials = true
 // 根据环境设定 baseUrl
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? (baseApi.backgroundHost + baseApi.apiPrefix) : baseApi
-	.apiPrefix,
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? (baseApi.backgroundHost + baseApi.apiPrefix) : baseApi.apiPrefix
 
-	axios.interceptors.response.use(r => {
-		// 如果没权限
-		if (r.data.code == stateCode.notAuthority) {
-			// 带着当前页面 url 跳到登入界面
-			window.open(pageRoutes.login + '?fromWhere=' + window.location.href, '_self')
-		}
-		return r
-	}, function(e) {
-		// Do something with response error
-		return Promise.reject(e)
-	})
+axios.interceptors.response.use(r => {
+	// 如果没权限
+	if (r.data.code == stateCode.notAuthority) {
+		// 带着当前页面 url 跳到登入界面
+		window.open(pageRoutes.login + '?fromWhere=' + window.location.href, '_self')
+	}
+	return r
+}, function(e) {
+	// Do something with response error
+	return Promise.reject(e)
+})
 Vue.prototype.$axios = axios
 
 

@@ -149,15 +149,14 @@ export default {
 			});
 			console.log(this.fromWhere)
 			window.open(this.fromWhere, '_self')
-			// TODO: 登入成功
 		},
 		// 失败登入调用
-		LoginFail(r) {
+		LoginFail(e) {
 			this.$notify({
 				title: '登入失败',
+				message: e ? e.data.message: '',
 				type: 'error'
 			});
-			// TODO: 登入失败
 		},
 		// 校验表单
 		submitForm(vm, formName) {
