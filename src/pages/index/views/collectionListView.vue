@@ -53,7 +53,7 @@ export default {
 					if (r.data.code == 200) {
 						vm.collectionList.push(...r.data.data)
 						vm.getCollectionListSuccess()
-						if (r.data.data.length < 8) {
+						if (r.data.data.length == 8) {
 							vm.page++
 						}
 					} else {

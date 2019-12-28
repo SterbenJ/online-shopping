@@ -55,7 +55,9 @@ export default {
 					vm.loading = false
 					if (r.data.code == 200) {
 						vm.order_list.push(...r.data.data)
-						vm.page++
+						if (r.data.data.length == 8) {
+							vm.page++
+						}
 						vm.getOrderListSuccess()
 					} else {
 						vm.getOrderListFail(r.data.message)
@@ -89,6 +91,7 @@ export default {
 		// 因为只变换了参数，所以组件不会刷新，要监听路由变化来加载数据
 		'$route' (to, from) {
 			console.log(2333)
+			this.page = 1
 			this.loading = true
 			this.getOrderList()
 			this.order_list = []
