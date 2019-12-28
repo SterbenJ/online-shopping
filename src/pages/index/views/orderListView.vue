@@ -55,7 +55,7 @@ export default {
 					vm.loading = false
 					if (r.data.code == 200) {
 						vm.order_list.push(...r.data.data)
-						if (r.data.data.length == 8) {
+						if (r.data.data.length > 0) {
 							vm.page++
 						}
 						vm.getOrderListSuccess()
