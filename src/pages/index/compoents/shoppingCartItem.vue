@@ -6,7 +6,7 @@
 				<span class="my-info info-name">{{ cItem.name }}</span>
 			</el-col>
 			<p class="info-title">单价<span class="my-info info-price">￥{{ cItem.price }}</span></p>
-			<el-input-number @change="changeCount" class="my-info info-count" v-model="count" :min="1" :max="99" label="数量"/>
+			<el-input-number @blur="changeCount" class="my-info info-count" v-model="count" :min="1" :max="99" label="数量"/>
 			<p class="info-title">小计<span class="my-info info-price">￥{{ totalPrice }}</span></p>
 			<el-row class="action-contain">
 				<el-col>

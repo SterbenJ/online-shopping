@@ -63,7 +63,7 @@ export default {
 				vm.loading = false
 				if (r.data.code == 200) {
 					vm.itemList.push(...r.data.data)
-					if (r.data.data.lengh > 0) {
+					if (r.data.data.length > 0) {
 						vm.page++
 					}
 				}
