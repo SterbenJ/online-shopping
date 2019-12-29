@@ -12,7 +12,7 @@
 					<el-form-item prop="nickname" label="昵称">
 						<el-input v-model="form.nickname" ></el-input>
 					</el-form-item>
-					<el-form-item maxlength="11" prop="phone_number" label="手机号码">
+					<el-form-item show-word-limit maxlength="11" prop="phone_number" label="手机号码">
 						<el-input v-model="form.phone_number" ></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="邮箱">
