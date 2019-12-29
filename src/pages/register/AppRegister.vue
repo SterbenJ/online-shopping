@@ -6,14 +6,14 @@
 					<el-form-item prop="account" label="账号(用于登入)">
 						<el-input v-model="form.account"></el-input>
 					</el-form-item>
-					<el-form-item show-password prop="password" label="密码">
-						<el-input v-model="form.password" ></el-input>
+					<el-form-item prop="password" label="密码">
+						<el-input show-password v-model="form.password" ></el-input>
 					</el-form-item>
 					<el-form-item prop="nickname" label="昵称">
 						<el-input v-model="form.nickname" ></el-input>
 					</el-form-item>
-					<el-form-item show-word-limit maxlength="11" prop="phone_number" label="手机号码">
-						<el-input v-model="form.phone_number" ></el-input>
+					<el-form-item prop="phone_number" label="手机号码">
+						<el-input show-word-limit maxlength="11" v-model="form.phone_number" ></el-input>
 					</el-form-item>
 					<el-form-item prop="email" label="邮箱">
 						<el-input v-model="form.email"></el-input>
